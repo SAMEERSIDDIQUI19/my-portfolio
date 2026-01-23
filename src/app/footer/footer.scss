@@ -1,0 +1,121 @@
+.footer {
+  background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 100%);
+  color: #e0e0e0;
+  padding: 3rem 0 1rem;
+  margin-top: auto;
+  border-top: 1px solid rgba(0, 212, 255, 0.1);
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 2rem;
+}
+
+.footer-content {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.footer-section {
+  h3 {
+    color: #00d4ff;
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    background: linear-gradient(45deg, #00d4ff, #090979);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  h4 {
+    color: #ffffff;
+    font-size: 1.2rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    margin-bottom: 0.5rem;
+    line-height: 1.6;
+  }
+
+  a {
+    color: #e0e0e0;
+    text-decoration: none;
+    transition: all 0.3s ease;
+
+    &:hover {
+      color: #00d4ff;
+      text-shadow: 0 0 5px rgba(0, 212, 255, 0.5);
+    }
+  }
+}
+
+.social-links {
+  display: flex;
+  gap: 1rem;
+}
+
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 212, 255, 0.1);
+  border-radius: 50%;
+  color: #00d4ff;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  font-size: 1.2rem;
+
+  &:hover {
+    background: #00d4ff;
+    color: #0f0f23;
+    transform: translateY(-3px);
+    box-shadow: 0 5px 15px rgba(0, 212, 255, 0.4);
+  }
+
+  &.linkedin:hover {
+    background: #0077b5;
+    color: #ffffff;
+  }
+
+  &.github:hover {
+    background: #333;
+    color: #ffffff;
+  }
+}
+
+.footer-bottom {
+  text-align: center;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  padding-top: 1rem;
+
+  p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: #a0a0a0;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-container {
+    padding: 0 1rem;
+  }
+
+  .footer-content {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+  }
+
+  .footer-section {
+    text-align: center;
+  }
+
+  .social-links {
+    justify-content: center;
+  }
+}

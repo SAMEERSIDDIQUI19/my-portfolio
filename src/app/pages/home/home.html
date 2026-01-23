@@ -1,0 +1,64 @@
+<section class="hero">
+  <div class="hero-background">
+    <div class="animated-bg"></div>
+    <div class="floating-elements">
+      <div class="floating-circle circle-1"></div>
+      <div class="floating-circle circle-2"></div>
+      <div class="floating-circle circle-3"></div>
+      <div class="floating-triangle triangle-1"></div>
+      <div class="floating-triangle triangle-2"></div>
+      
+      <!-- Floating Code Elements -->
+      <div class="floating-code code-1">&lt;/&gt;</div>
+      <div class="floating-code code-2">&#123; &#125;</div>
+      <div class="floating-code code-3">console.log()</div>
+      <div class="floating-code code-4">function()</div>
+      <div class="floating-code code-5">React</div>
+      <div class="floating-code code-6">Angular</div>
+      <div class="floating-code code-7">Node.js</div>
+      <div class="floating-code code-8">TypeScript</div>
+      
+      <!-- Tech Icons -->
+      <div class="floating-tech tech-1">⚡</div>
+      <div class="floating-tech tech-2">🚀</div>
+      <div class="floating-tech tech-3">💻</div>
+      <div class="floating-tech tech-4">🔧</div>
+    </div>
+  </div>
+  <div class="hero-content">
+    <div class="hero-text">
+      <!-- Profile Picture Section -->
+      <div class="profile-picture-container">
+        <div class="profile-picture">
+          <img [src]="profileImageUrl" alt="Profile Picture" class="profile-img" 
+               (error)="onImageError($event)" (load)="onImageLoad($event)">
+        </div>
+      </div>
+      
+      <h1 class="hero-name">SAMEER AHMED SIDDIQUI</h1>
+      <h2 class="hero-title">
+        <span class="typed-text">{{ typedText }}</span>
+        <span class="cursor">|</span>
+      </h2>
+      <p class="hero-tagline">
+        Passionate about creating innovative solutions and delivering exceptional user experiences.
+        Specializing in full-stack development with modern technologies.
+      </p>
+    </div>
+    <div class="hero-actions">
+      <button class="cta-button" (click)="scrollToSection('projects')">
+        <span>View My Projects</span>
+        <svg class="arrow-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <path d="M5 12h14M12 5l7 7-7 7"/>
+        </svg>
+      </button>
+      <button class="secondary-button" (click)="scrollToSection('contact')">
+        Get In Touch
+      </button>
+      
+      <button class="cv-download-button" (click)="downloadCv()">
+        Download CV
+      </button>
+    </div>
+  </div>
+</section>

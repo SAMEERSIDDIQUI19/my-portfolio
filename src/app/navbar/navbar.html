@@ -1,0 +1,31 @@
+<nav class="navbar sticky-nav">
+  <div class="navbar-container">
+    <div class="navbar-brand">
+      <a href="#home" class="brand-link" (click)="scrollToSection('home', $event)">
+        SAMEER AHMED SIDDIQUI
+        <svg class="laptop-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <rect x="4" y="4" width="16" height="10" rx="1" ry="1"/>
+          <path d="M2 18h20l-2-4H4l-2 4z"/>
+          <line x1="12" y1="14" x2="12" y2="18"/>
+        </svg>
+      </a>
+    </div>
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a href="#home" class="nav-link" (click)="scrollToSection('home', $event)">Home</a>
+      </li>
+      <li class="nav-item">
+        <a href="#about" class="nav-link" (click)="scrollToSection('about', $event)">About</a>
+      </li>
+      <li class="nav-item">
+        <a href="#skills" class="nav-link" (click)="scrollToSection('skills', $event)">Skills</a>
+      </li>
+      <li class="nav-item">
+        <a href="#projects" class="nav-link" (click)="scrollToSection('projects', $event)">Projects</a>
+      </li>
+      <li class="nav-item">
+        <a href="#contact" class="nav-link" (click)="scrollToSection('contact', $event)">Contact</a>
+      </li>
+    </ul>
+  </div>
+</nav>

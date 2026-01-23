@@ -1,0 +1,125 @@
+<section class="contact">
+  <div class="container">
+    <div class="section-header">
+      <h2>Get In Touch</h2>
+      <p>Let's work together on your next project</p>
+    </div>
+
+    <div class="contact-content">
+      <div class="contact-info">
+        <div class="info-card">
+          <div class="info-icon">
+            <i class="fas fa-envelope"></i>
+          </div>
+          <div class="info-details">
+            <h3>Email</h3>
+            <a href="mailto:sameer_as@live.com">sameer_as@live.com</a>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon">
+            <i class="fas fa-phone"></i>
+          </div>
+          <div class="info-details">
+            <h3>Phone</h3>
+            <a href="tel:+923352722195">+92 335 2722195</a>
+          </div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-icon">
+            <i class="fas fa-map-marker-alt"></i>
+          </div>
+          <div class="info-details">
+            <h3>Location</h3>
+            <p>Karachi, Pakistan</p>
+          </div>
+        </div>
+
+        <div class="social-links">
+          <a href="https://www.linkedin.com/in/sameerahmedsiddiqui" target="_blank" class="social-link linkedin">
+            <i class="fab fa-linkedin-in"></i>
+            <span>LinkedIn</span>
+          </a>
+          <a href="https://github.com/SAMEERSIDDIQUI19" target="_blank" class="social-link github">
+            <i class="fab fa-github"></i>
+            <span>GitHub</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="contact-form">
+        <form (ngSubmit)="onSubmit()" #contactForm="ngForm">
+          <div class="form-group">
+            <label for="name">Name</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              [(ngModel)]="formData.name"
+              #name="ngModel"
+              required
+              placeholder="Your full name"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input
+              type="email"
+              id="email"
+              name="email"
+              [(ngModel)]="formData.email"
+              #email="ngModel"
+              required
+              email
+              placeholder="your.email@example.com"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="subject">Subject</label>
+            <input
+              type="text"
+              id="subject"
+              name="subject"
+              [(ngModel)]="formData.subject"
+              #subject="ngModel"
+              required
+              placeholder="What's this about?"
+            >
+          </div>
+
+          <div class="form-group">
+            <label for="message">Message</label>
+            <textarea
+              id="message"
+              name="message"
+              [(ngModel)]="formData.message"
+              #message="ngModel"
+              required
+              rows="5"
+              placeholder="Tell me about your project..."
+            ></textarea>
+          </div>
+
+          <button
+            type="submit"
+            class="submit-btn"
+            [disabled]="!contactForm.form.valid"
+          >
+            <span>Send Message</span>
+            <i class="fas fa-paper-plane"></i>
+          </button>
+        </form>
+
+        @if (submitMessage) {
+          <div class="submit-message" [ngClass]="{'success': submitSuccess, 'error': !submitSuccess}">
+            {{ submitMessage }}
+          </div>
+        }
+      </div>
+    </div>
+  </div>
+</section>

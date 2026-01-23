@@ -1,0 +1,61 @@
+<section class="projects">
+  <div class="container">
+    <div class="section-header">
+      <h2>My Projects</h2>
+      <p>Check out my latest work on GitHub</p>
+    </div>
+
+    <div class="projects-content">
+      @if (loading) {
+        <div class="loading">
+          <div class="loading-spinner"></div>
+          <p>Loading projects...</p>
+        </div>
+      } @else if (error) {
+        <div class="error">
+          <i class="fas fa-exclamation-triangle"></i>
+          <p>Unable to load projects. Please try again later.</p>
+        </div>
+      } @else {
+        <div class="projects-grid">
+          @for (repo of repos; track repo.name) {
+            <div class="project-card">
+              <div class="project-header">
+                <h3>{{ repo.name }}</h3>
+                <a [href]="repo.html_url" target="_blank" class="project-link">
+                  <i class="fab fa-github"></i>
+                </a>
+              </div>
+
+              <p class="project-description">
+                {{ repo.description || 'No description available.' }}
+              </p>
+
+              <div class="project-details">
+                @if (repo.language) {
+                  <span class="project-language">
+                    <i class="fas fa-code"></i>
+                    {{ repo.language }}
+                  </span>
+                }
+
+                <span class="project-date">
+                  <i class="fas fa-calendar"></i>
+                  {{ formatDate(repo.updated_at) }}
+                </span>
+              </div>
+
+              @if (repo.topics && repo.topics.length > 0) {
+                <div class="project-topics">
+                  @for (topic of repo.topics.slice(0, 3); track topic) {
+                    <span class="topic-tag">{{ topic }}</span>
+                  }
+                </div>
+              }
+            </div>
+          }
+        </div>
+      }
+    </div>
+  </div>
+</section>
