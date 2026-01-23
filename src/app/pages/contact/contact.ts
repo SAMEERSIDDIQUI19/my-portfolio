@@ -43,19 +43,7 @@ export class ContactComponent {
         
         this.submitSuccess = true;
         this.submitMessage = 'Thank you for your message! I\'ll get back to you soon.';
-
-        // Reset form
-        this.formData = {
-          name: '',
-          email: '',
-          subject: '',
-          message: ''
-        };
-
-        // Clear message after 5 seconds
-        setTimeout(() => {
-          this.submitMessage = '';
-        }, 5000);
+        console.log('Form submitted successfully, submitSuccess:', this.submitSuccess);
       } catch (error: any) {
         console.error('Error submitting form:', error);
         console.error('Error code:', error?.code);
@@ -69,5 +57,17 @@ export class ContactComponent {
       this.submitSuccess = false;
       this.submitMessage = 'Please fill in all required fields.';
     }
+  }
+
+  resetForm() {
+    this.submitSuccess = false;
+    this.submitMessage = '';
+    this.formData = {
+      name: '',
+      email: '',
+      subject: '',
+      message: ''
+    };
+    console.log('Form reset, submitSuccess:', this.submitSuccess);
   }
 }
