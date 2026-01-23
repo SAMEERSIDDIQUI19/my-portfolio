@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { FirebaseService, ContactFormData } from '../../services/firebase.service';
+import { Firestore, collection, addDoc, serverTimestamp } from '@angular/fire/firestore';
 
 @Component({
   selector: 'app-contact',
@@ -10,7 +10,7 @@ import { FirebaseService, ContactFormData } from '../../services/firebase.servic
   styleUrl: './contact.scss',
 })
 export class ContactComponent {
-  formData: ContactFormData = {
+  formData = {
     name: '',
     email: '',
     subject: '',
@@ -21,7 +21,7 @@ export class ContactComponent {
   submitSuccess = false;
   isSubmitting = false;
 
-  constructor(private firebaseService: FirebaseService) {}
+  constructor(private firestore: Firestore) {}
 
   async onSubmit() {
     if (this.formData.name && this.formData.email && this.formData.subject && this.formData.message) {
@@ -29,7 +29,17 @@ export class ContactComponent {
       this.submitMessage = '';
 
       try {
-        await this.firebaseService.submitContactForm(this.formData);
+        await addDoc(
+          collection(this.firestore, 'contactSubmissions'),
+          {
+            name: this.formData.name,
+            email: this.formData.email,
+            subject: this.formData.subject,
+            message: this.formData.message,
+            timestamp: serverTimestamp(),
+            status: 'new'
+          }
+        );
         
         this.submitSuccess = true;
         this.submitMessage = 'Thank you for your message! I\'ll get back to you soon.';
@@ -46,10 +56,12 @@ export class ContactComponent {
         setTimeout(() => {
           this.submitMessage = '';
         }, 5000);
-      } catch (error) {
+      } catch (error: any) {
         console.error('Error submitting form:', error);
+        console.error('Error code:', error?.code);
+        console.error('Error message:', error?.message);
         this.submitSuccess = false;
-        this.submitMessage = 'Sorry, there was an error sending your message. Please try again.';
+        this.submitMessage = `Error: ${error?.message || 'Sorry, there was an error sending your message. Please try again.'}`;
       } finally {
         this.isSubmitting = false;
       }
