@@ -41,6 +41,38 @@
   }
 }
 
+.private-notice {
+  margin-bottom: 3rem;
+  
+  .notice-card {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+    border-left: 5px solid #667eea;
+    
+    i {
+      font-size: 2.5rem;
+      color: #667eea;
+      margin-bottom: 1rem;
+    }
+    
+    h3 {
+      font-size: 1.5rem;
+      color: #0f0f23;
+      margin-bottom: 1rem;
+    }
+    
+    p {
+      color: #666;
+      line-height: 1.6;
+      max-width: 800px;
+      margin: 0 auto;
+    }
+  }
+}
+
 .projects-content {
   .loading {
     display: flex;
@@ -125,19 +157,29 @@
       left: 100%;
     }
   }
+  
+  &.private-project {
+    border-left: 4px solid #ff6b6b;
+    
+    &::before {
+      background: linear-gradient(90deg, transparent, rgba(255, 107, 107, 0.05), transparent);
+    }
+  }
 
   .project-header {
     display: flex;
     justify-content: space-between;
     align-items: flex-start;
     margin-bottom: 1rem;
+    flex-wrap: wrap;
+    gap: 1rem;
 
     h3 {
       font-size: 1.5rem;
       color: #0f0f23;
       margin: 0;
       flex: 1;
-      margin-right: 1rem;
+      min-width: 200px;
     }
 
     .project-link {
@@ -152,6 +194,46 @@
         color: #764ba2;
         background: rgba(102, 126, 234, 0.1);
         transform: scale(1.1);
+      }
+    }
+    
+    .project-status {
+      display: flex;
+      flex-direction: column;
+      gap: 0.5rem;
+      align-items: flex-end;
+      
+      .private-badge {
+        background: linear-gradient(45deg, #ff6b6b, #ee5a52);
+        color: white;
+        padding: 0.3rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.3rem;
+        
+        i {
+          font-size: 0.7rem;
+        }
+      }
+      
+      .status-badge {
+        padding: 0.2rem 0.6rem;
+        border-radius: 15px;
+        font-size: 0.75rem;
+        font-weight: 500;
+        
+        &.completed {
+          background: linear-gradient(45deg, #00d4aa, #01a085);
+          color: white;
+        }
+        
+        &.in-progress {
+          background: linear-gradient(45deg, #ffd93d, #ff9500);
+          color: white;
+        }
       }
     }
   }

@@ -1,14 +1,13 @@
-import { Component, OnInit, inject } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
-interface Repo {
+interface Project {
   name: string;
   description: string;
-  html_url: string;
   language: string;
   topics: string[];
-  updated_at: string;
+  isPrivate: boolean;
+  status: string;
 }
 
 @Component({
@@ -18,37 +17,60 @@ interface Repo {
   styleUrl: './projects.scss',
 })
 export class ProjectsComponent implements OnInit {
-  private http = inject(HttpClient);
-  repos: Repo[] = [];
+  projects: Project[] = [];
   loading = true;
-  error = false;
+  showPrivateMessage = true;
 
   ngOnInit() {
-    this.fetchRepos();
+    this.loadProjects();
   }
 
-  fetchRepos() {
-    this.http.get<Repo[]>('https://api.github.com/users/SAMEERSIDDIQUI19/repos?sort=updated&per_page=6')
-      .subscribe({
-        next: (data) => {
-          this.repos = data;
-          this.loading = false;
+  loadProjects() {
+    // Simulate loading time
+    setTimeout(() => {
+      this.projects = [
+        {
+          name: 'AdminCRM',
+          description: 'Built a comprehensive configuration module with multiple screens that can manage all databases simultaneously. Developed using Angular 17 with advanced database management capabilities.',
+          language: 'Angular 17',
+          topics: ['angular', 'typescript', 'database-management'],
+          isPrivate: true,
+          status: 'Completed'
         },
-        error: (err) => {
-          console.error('Error fetching repos:', err);
-          this.error = true;
-          this.loading = false;
+        {
+          name: 'AdminCRM API',
+          description: 'Backend API service for AdminCRM system built with .NET Core and SQL Database. Provides robust data management and configuration services for the frontend application.',
+          language: '.NET Core',
+          topics: ['dotnet-core', 'sql-server', 'web-api'],
+          isPrivate: true,
+          status: 'Completed'
+        },
+        {
+          name: 'CRM System',
+          description: 'Developed multiple systems to manage various operations using .NET WebForms and SQL. Integrated comprehensive email management system and implemented merchant management functionality.',
+          language: '.NET WebForms',
+          topics: ['webforms', 'sql', 'email-integration'],
+          isPrivate: true,
+          status: 'Completed'
+        },
+        {
+          name: 'HRMS (Human Resource Management)',
+          description: 'Automated ZKTeco attendance machines to directly fetch data, display it in the database, and present it per employee. Implemented multiple setup screens for management using .NET Core MVC.',
+          language: '.NET Core MVC',
+          topics: ['mvc', 'sql', 'zkteco-integration'],
+          isPrivate: true,
+          status: 'Completed'
+        },
+        {
+          name: 'LMS (Learning Management System)',
+          description: 'Created comprehensive modules for adding courses and course content management. Built with .NET Core MVC and SQL database for educational content delivery and management.',
+          language: '.NET Core MVC',
+          topics: ['mvc', 'sql', 'education-tech'],
+          isPrivate: true,
+          status: 'Completed'
         }
-      });
-  }
-
-  // Format date for display in template
-  formatDate(dateString: string): string {
-    const date = new Date(dateString);
-    return date.toLocaleDateString('en-US', {
-      year: 'numeric',
-      month: 'short',
-      day: 'numeric'
-    });
+      ];
+      this.loading = false;
+    }, 1500);
   }
 }

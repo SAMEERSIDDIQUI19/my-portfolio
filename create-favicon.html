@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>SAS Favicon Generator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: #f0f0f0;
+        }
+        .container {
+            text-align: center;
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+        }
+        canvas {
+            border: 2px solid #ddd;
+            margin: 1rem 0;
+        }
+        button {
+            background: linear-gradient(45deg, #00d4ff, #090979);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 5px;
+        }
+        button:hover {
+            opacity: 0.9;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>SAS Favicon Generator</h1>
+        <canvas id="favicon" width="32" height="32"></canvas>
+        <br>
+        <button onclick="generateFavicon()">Generate SAS Favicon</button>
+        <button onclick="downloadFavicon()">Download Favicon</button>
+        
+        <script>
+            function generateFavicon() {
+                const canvas = document.getElementById('favicon');
+                const ctx = canvas.getContext('2d');
+                
+                // Clear canvas
+                ctx.clearRect(0, 0, 32, 32);
+                
+                // Create gradient background
+                const gradient = ctx.createLinearGradient(0, 0, 32, 32);
+                gradient.addColorStop(0, '#00d4ff');
+                gradient.addColorStop(1, '#090979');
+                
+                // Fill background
+                ctx.fillStyle = gradient;
+                ctx.fillRect(0, 0, 32, 32);
+                
+                // Add border
+                ctx.strokeStyle = '#ffffff';
+                ctx.lineWidth = 1;
+                ctx.strokeRect(1, 1, 30, 30);
+                
+                // Draw SAS text
+                ctx.fillStyle = '#ffffff';
+                ctx.font = 'bold 10px Arial';
+                ctx.textAlign = 'center';
+                ctx.textBaseline = 'middle';
+                ctx.fillText('SAS', 16, 16);
+            }
+            
+            function downloadFavicon() {
+                const canvas = document.getElementById('favicon');
+                const link = document.createElement('a');
+                link.download = 'favicon.ico';
+                link.href = canvas.toDataURL('image/png');
+                link.click();
+            }
+            
+            // Generate favicon on page load
+            generateFavicon();
+        </script>
+    </div>
+</body>
+</html>

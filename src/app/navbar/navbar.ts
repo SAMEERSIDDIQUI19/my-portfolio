@@ -7,6 +7,16 @@ import { Component } from '@angular/core';
   styleUrl: './navbar.scss',
 })
 export class NavbarComponent {
+  isMobileMenuOpen = false;
+
+  toggleMobileMenu(): void {
+    this.isMobileMenuOpen = !this.isMobileMenuOpen;
+  }
+
+  closeMobileMenu(): void {
+    this.isMobileMenuOpen = false;
+  }
+
   scrollToSection(sectionId: string, event?: Event): void {
     if (event) {
       event.preventDefault();

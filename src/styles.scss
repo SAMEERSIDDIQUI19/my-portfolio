@@ -138,6 +138,16 @@ section {
 }
 
 /* Responsive utilities */
+@media (max-width: 1024px) {
+  .tablet-hide {
+    display: none;
+  }
+  
+  .tablet-center {
+    text-align: center;
+  }
+}
+
 @media (max-width: 768px) {
   .mobile-hide {
     display: none;
@@ -146,10 +156,34 @@ section {
   .mobile-center {
     text-align: center;
   }
+  
+  .mobile-full-width {
+    width: 100% !important;
+  }
+  
+  .mobile-stack {
+    flex-direction: column !important;
+  }
 }
 
 @media (max-width: 480px) {
   .small-hide {
     display: none;
+  }
+  
+  .small-text {
+    font-size: 0.9rem !important;
+  }
+}
+
+/* Touch-friendly improvements */
+@media (hover: none) and (pointer: coarse) {
+  .hover-lift:hover {
+    transform: none;
+  }
+  
+  button, .cta-button, .secondary-button {
+    min-height: 44px;
+    min-width: 44px;
   }
 }

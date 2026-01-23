@@ -2,7 +2,8 @@
   <div class="navbar-container">
     <div class="navbar-brand">
       <a href="#home" class="brand-link" (click)="scrollToSection('home', $event)">
-        SAMEER AHMED SIDDIQUI
+        <span class="brand-text">SAMEER AHMED SIDDIQUI</span>
+        <span class="brand-text-mobile">SAS</span>
         <svg class="laptop-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
           <rect x="4" y="4" width="16" height="10" rx="1" ry="1"/>
           <path d="M2 18h20l-2-4H4l-2 4z"/>
@@ -10,21 +11,29 @@
         </svg>
       </a>
     </div>
-    <ul class="navbar-nav">
+    
+    <!-- Mobile menu button -->
+    <button class="mobile-menu-btn" (click)="toggleMobileMenu()" [class.active]="isMobileMenuOpen">
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+      <span class="hamburger-line"></span>
+    </button>
+    
+    <ul class="navbar-nav" [class.mobile-open]="isMobileMenuOpen">
       <li class="nav-item">
-        <a href="#home" class="nav-link" (click)="scrollToSection('home', $event)">Home</a>
+        <a href="#home" class="nav-link" (click)="scrollToSection('home', $event); closeMobileMenu()">Home</a>
       </li>
       <li class="nav-item">
-        <a href="#about" class="nav-link" (click)="scrollToSection('about', $event)">About</a>
+        <a href="#about" class="nav-link" (click)="scrollToSection('about', $event); closeMobileMenu()">About</a>
       </li>
       <li class="nav-item">
-        <a href="#skills" class="nav-link" (click)="scrollToSection('skills', $event)">Skills</a>
+        <a href="#skills" class="nav-link" (click)="scrollToSection('skills', $event); closeMobileMenu()">Skills</a>
       </li>
       <li class="nav-item">
-        <a href="#projects" class="nav-link" (click)="scrollToSection('projects', $event)">Projects</a>
+        <a href="#projects" class="nav-link" (click)="scrollToSection('projects', $event); closeMobileMenu()">Projects</a>
       </li>
       <li class="nav-item">
-        <a href="#contact" class="nav-link" (click)="scrollToSection('contact', $event)">Contact</a>
+        <a href="#contact" class="nav-link" (click)="scrollToSection('contact', $event); closeMobileMenu()">Contact</a>
       </li>
     </ul>
   </div>

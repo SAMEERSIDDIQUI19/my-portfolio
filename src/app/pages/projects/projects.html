@@ -2,7 +2,7 @@
   <div class="container">
     <div class="section-header">
       <h2>My Projects</h2>
-      <p>Check out my latest work on GitHub</p>
+      <p>Showcasing my professional development work</p>
     </div>
 
     <div class="projects-content">
@@ -11,43 +11,45 @@
           <div class="loading-spinner"></div>
           <p>Loading projects...</p>
         </div>
-      } @else if (error) {
-        <div class="error">
-          <i class="fas fa-exclamation-triangle"></i>
-          <p>Unable to load projects. Please try again later.</p>
-        </div>
       } @else {
+        <div class="private-notice">
+          <div class="notice-card">
+            <i class="fas fa-lock"></i>
+            <h3>Private Repository Notice</h3>
+            <p>Most of my professional projects are hosted in private repositories due to client confidentiality and proprietary code. Below are some examples of the types of projects I work on:</p>
+          </div>
+        </div>
+        
         <div class="projects-grid">
-          @for (repo of repos; track repo.name) {
-            <div class="project-card">
+          @for (project of projects; track project.name) {
+            <div class="project-card private-project">
               <div class="project-header">
-                <h3>{{ repo.name }}</h3>
-                <a [href]="repo.html_url" target="_blank" class="project-link">
-                  <i class="fab fa-github"></i>
-                </a>
+                <h3>{{ project.name }}</h3>
+                <div class="project-status">
+                  <span class="private-badge">
+                    <i class="fas fa-lock"></i>
+                    Private
+                  </span>
+                  <span class="status-badge" [class]="project.status === 'Completed' ? 'completed' : 'in-progress'">
+                    {{ project.status }}
+                  </span>
+                </div>
               </div>
 
               <p class="project-description">
-                {{ repo.description || 'No description available.' }}
+                {{ project.description }}
               </p>
 
               <div class="project-details">
-                @if (repo.language) {
-                  <span class="project-language">
-                    <i class="fas fa-code"></i>
-                    {{ repo.language }}
-                  </span>
-                }
-
-                <span class="project-date">
-                  <i class="fas fa-calendar"></i>
-                  {{ formatDate(repo.updated_at) }}
+                <span class="project-language">
+                  <i class="fas fa-code"></i>
+                  {{ project.language }}
                 </span>
               </div>
 
-              @if (repo.topics && repo.topics.length > 0) {
+              @if (project.topics && project.topics.length > 0) {
                 <div class="project-topics">
-                  @for (topic of repo.topics.slice(0, 3); track topic) {
+                  @for (topic of project.topics; track topic) {
                     <span class="topic-tag">{{ topic }}</span>
                   }
                 </div>

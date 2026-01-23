@@ -6,11 +6,11 @@ import { ProjectsComponent } from './pages/projects/projects';
 import { ContactComponent } from './pages/contact/contact';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: '', component: HomeComponent },
   { path: 'home', component: HomeComponent },
   { path: 'about', component: AboutComponent },
   { path: 'skills', component: SkillsComponent },
   { path: 'projects', component: ProjectsComponent },
   { path: 'contact', component: ContactComponent },
-  { path: '**', redirectTo: '/home' }
+  { path: '**', component: HomeComponent }
 ];
