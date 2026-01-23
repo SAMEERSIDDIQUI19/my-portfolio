@@ -107,10 +107,10 @@
           <button
             type="submit"
             class="submit-btn"
-            [disabled]="!contactForm.form.valid"
+            [disabled]="!contactForm.form.valid || isSubmitting"
           >
-            <span>Send Message</span>
-            <i class="fas fa-paper-plane"></i>
+            <span>{{ isSubmitting ? 'Sending...' : 'Send Message' }}</span>
+            <i class="fas" [ngClass]="isSubmitting ? 'fa-spinner fa-spin' : 'fa-paper-plane'"></i>
           </button>
         </form>
 
