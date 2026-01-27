@@ -6,6 +6,7 @@
     "start": "ng serve",
     "build": "ng build && node move-build.js",
     "build:prod": "ng build --configuration production --base-href /my-portfolio/ && node move-build.js",
+    "deploy": "npm run build:prod && npx angular-cli-ghpages --dir=dist/angular-portfolio",
     "watch": "ng build --watch --configuration development",
     "test": "ng test"
   },
