@@ -1,0 +1,171 @@
+<section class="contact-section dark">
+  <div class="contact-container">
+    <div class="section-header">
+      <h2 class="section-title">Let's Connect</h2>
+      <p class="section-subtitle">Have a project in mind or just want to chat? Send me a message!</p>
+    </div>
+
+    <div class="contact-content">
+      <div class="form-wrapper" @fadeInUp>
+        <!-- Quick Message Chips -->
+        <div class="quick-messages" @slideIn>
+          <h4 class="quick-message-title">Quick Start</h4>
+          <div class="chips-container">
+            @for (msg of quickMessages; track msg.label) {
+              <button 
+                class="message-chip"
+                [class.active]="selectedChip() === msg.label"
+                (click)="selectQuickMessage(msg.label)"
+                @pulse
+              >
+                <span class="chip-emoji">{{ msg.emoji }}</span>
+                <span class="chip-label">{{ msg.label }}</span>
+              </button>
+            }
+          </div>
+        </div>
+
+        <!-- Contact Form -->
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact-form">
+          <!-- Name Field -->
+          <div class="form-group" [class.focused]="name?.touched || name?.value">
+            <label for="name" class="floating-label">Your Name</label>
+            <input
+              id="name"
+              type="text"
+              formControlName="name"
+              class="form-input"
+              placeholder=" "
+            />
+            @if (isFieldInvalid('name')) {
+              <span class="error-message">{{ getErrorMessage('name') }}</span>
+            }
+          </div>
+
+          <!-- Email Field -->
+          <div class="form-group" [class.focused]="email?.touched || email?.value">
+            <label for="email" class="floating-label">Email Address</label>
+            <input
+              id="email"
+              type="email"
+              formControlName="email"
+              class="form-input"
+              placeholder=" "
+            />
+            @if (isFieldInvalid('email')) {
+              <span class="error-message">{{ getErrorMessage('email') }}</span>
+            }
+          </div>
+
+          <!-- Subject Field -->
+          <div class="form-group" [class.focused]="subject?.touched || subject?.value">
+            <label for="subject" class="floating-label">Subject</label>
+            <input
+              id="subject"
+              type="text"
+              formControlName="subject"
+              class="form-input"
+              placeholder=" "
+            />
+            @if (isFieldInvalid('subject')) {
+              <span class="error-message">{{ getErrorMessage('subject') }}</span>
+            }
+          </div>
+
+          <!-- Message Field -->
+          <div class="form-group" [class.focused]="message?.touched || message?.value">
+            <label for="message" class="floating-label">Your Message</label>
+            <textarea
+              id="message"
+              formControlName="message"
+              class="form-input textarea"
+              rows="5"
+              placeholder=" "
+            ></textarea>
+            @if (isFieldInvalid('message')) {
+              <span class="error-message">{{ getErrorMessage('message') }}</span>
+            }
+          </div>
+
+          <!-- Submit Button -->
+          <button 
+            type="submit" 
+            class="submit-btn"
+            [disabled]="isSubmitting()"
+            [class.loading]="isSubmitting()"
+          >
+            @if (isSubmitting()) {
+              <span class="btn-text">Sending...</span>
+              <span class="btn-spinner"></span>
+            } @else {
+              <span class="btn-text">Send Message</span>
+              <span class="btn-icon">→</span>
+            }
+          </button>
+        </form>
+
+        <!-- Success Message -->
+        @if (showSuccessMessage()) {
+          <div class="success-message" @fadeInUp>
+            <span class="success-icon">✓</span>
+            <div class="success-content">
+              <h4>Message Sent!</h4>
+              <p>Thank you for reaching out. I'll get back to you soon.</p>
+            </div>
+          </div>
+        }
+
+        <!-- Error Message -->
+        @if (isError()) {
+          <div class="error-message-banner" @fadeInUp>
+            <span class="error-icon">✕</span>
+            <p>Something went wrong. Please try again.</p>
+          </div>
+        }
+      </div>
+
+      <!-- Contact Info Side Panel -->
+      <div class="contact-info" @slideIn>
+        <div class="info-card">
+          <h3>Other Ways to Connect</h3>
+          
+          <div class="info-item">
+            <div class="info-icon">📧</div>
+            <div class="info-details">
+              <span class="info-label">Email</span>
+              <a href="mailto:sameer_as@live.com" class="info-value">sameer_as@live.com</a>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">📍</div>
+            <div class="info-details">
+              <span class="info-label">Location</span>
+              <span class="info-value">Available for remote and onsite work.</span>
+            </div>
+          </div>
+
+          <div class="info-item">
+            <div class="info-icon">⏰</div>
+            <div class="info-details">
+              <span class="info-label">Response Time</span>
+              <span class="info-value">Usually within 24 hours</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="social-links">
+          <a href="https://github.com/SAMEERSIDDIQUI19" class="social-link" title="GitHub">
+            <span>GitHub</span>
+          </a>
+          <a href="https://www.linkedin.com/in/sameerahmedsiddiqui" class="social-link" title="LinkedIn">
+            <span>LinkedIn</span>
+          </a>
+          <a href="https://wa.me/923352722195" class="social-link" title="LinkedIn">
+            <span>Whatsapp</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

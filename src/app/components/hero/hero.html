@@ -1,0 +1,272 @@
+<section class="hero-section dark">
+  <div class="hero-container">
+    <div class="hero-content">
+      <!-- Available for Work Badge -->
+      <div @fadeInUp class="availability-badge" (click)="toggleAvailability()">
+        <div class="beacon" [class.available]="availableForWork()"></div>
+        <span class="status-text">
+          {{ availableForWork() ? 'Available for Work' : 'Currently Busy' }}
+        </span>
+      </div>
+
+      <!-- Main Headline -->
+      <div @fadeInUp class="headline-container">
+        <h1 class="hero-title">
+          Hi, I'm <span class="gradient-text">Sameer</span>
+        </h1>
+        <div class="typing-container">
+          <span class="typing-text">{{ typingText() }}</span>
+          <span class="cursor">|</span>
+        </div>
+        <p class="hero-subtitle">
+          Full-Stack Developer crafting scalable, high-performance solutions with modern technologies
+        </p>
+      </div>
+
+      <!-- Tech Stack Interactive Widget -->
+      <div @fadeInUp class="tech-widget">
+        <div class="widget-header">
+          <h3>Tech Stack</h3>
+          <div class="category-filters">
+            <button 
+              class="filter-chip" 
+              [class.active]="selectedCategory() === 'all'"
+              (click)="selectCategory('all')">
+              All
+            </button>
+            <button 
+              class="filter-chip" 
+              [class.active]="selectedCategory() === 'frontend'"
+              (click)="selectCategory('frontend')">
+              Frontend
+            </button>
+            <button 
+              class="filter-chip" 
+              [class.active]="selectedCategory() === 'backend'"
+              (click)="selectCategory('backend')">
+              Backend
+            </button>
+            <button 
+              class="filter-chip" 
+              [class.active]="selectedCategory() === 'database'"
+              (click)="selectCategory('database')">
+              Database
+            </button>
+          </div>
+        </div>
+
+        <div @typing class="tech-display">
+          <div class="tech-icon">
+            <div class="code-brackets">
+              <span class="bracket">&lt;</span>
+              <span class="tech-name">{{ currentTech().name }}</span>
+              <span class="bracket">/&gt;</span>
+            </div>
+          </div>
+          <div class="tech-category">
+            <span class="category-badge" [class]="currentTech().category">
+              {{ currentTech().category }}
+            </span>
+          </div>
+        </div>
+
+        <div class="tech-indicators">
+          @for (tech of filteredTechStack(); track tech.name) {
+            <div 
+              class="indicator" 
+              [class.active]="currentTech().name === tech.name"
+              [class.category-frontend]="tech.category === 'frontend'"
+              [class.category-backend]="tech.category === 'backend'"
+              [class.category-database]="tech.category === 'database'">
+            </div>
+          }
+        </div>
+      </div>
+
+      <!-- CTA Buttons -->
+      <div @fadeInUp class="cta-container">
+        <a href="#contact" class="btn btn-primary">
+          Get in Touch
+        </a>
+        <a href="#projects" class="btn btn-secondary">
+          View My Work
+        </a>
+        <a href="assets/cv/SAMEER-AHMED-SIDDIQUI-Resume.pdf" download class="btn btn-tertiary">
+          Download CV
+        </a>
+      </div>
+    </div>
+
+    <!-- Decorative Elements - Full Stack Developer Theme -->
+    <div class="hero-decoration">
+      <!-- Terminal Window -->
+      <div class="terminal-window">
+        <div class="terminal-header">
+          <div class="terminal-dot red"></div>
+          <div class="terminal-dot yellow"></div>
+          <div class="terminal-dot green"></div>
+        </div>
+        <div class="terminal-content">
+          <div class="terminal-line">
+            <span class="terminal-prompt">$</span>
+            <span class="terminal-command">npm run build</span>
+          </div>
+          <div class="terminal-line">
+            <span class="terminal-output">✓ Build completed</span>
+          </div>
+          <div class="terminal-line">
+            <span class="terminal-prompt">$</span>
+            <span class="terminal-command">git push origin main</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Code Snippet -->
+      <div class="code-snippet">
+        <div class="code-line">
+          <span class="code-keyword">const</span>
+          <span class="code-variable">app</span>
+          <span class="code-keyword">=</span>
+          <span class="code-function">express</span>()
+        </div>
+        <div class="code-line">
+          <span class="code-variable">app</span>.<span class="code-function">listen</span>(<span class="code-string">3000</span>)
+        </div>
+        <div class="code-line">
+          <span class="code-comment">// Server running</span>
+        </div>
+      </div>
+
+      <!-- Database Icon -->
+      <div class="database-icon">
+        <div class="db-layer"></div>
+        <div class="db-layer"></div>
+        <div class="db-layer"></div>
+      </div>
+
+      <!-- Server Icon -->
+      <div class="server-icon">
+        <div class="server-box"></div>
+        <div class="server-box"></div>
+        <div class="server-box"></div>
+      </div>
+
+      <!-- Network Lines -->
+      <div class="network-lines">
+        <div class="line line-1"></div>
+        <div class="line line-2"></div>
+        <div class="line line-3"></div>
+      </div>
+
+      <!-- Tech Logos -->
+      <div class="tech-logo python-logo">
+        <svg viewBox="0 0 100 100" width="60" height="60">
+          <defs>
+            <linearGradient id="python-grad1" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#3776AB;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#FFD43B;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          <path d="M50 5c-12 0-14 4-14 9v7h14v3H28c-9 0-13 5-13 13s4 13 13 13h7v-7c0-9 5-13 13-13h14c9 0 13-5 13-13s-4-13-13-13h-7v-3c0-9-5-13-13-13h-7z" fill="url(#python-grad1)" opacity="0.4"/>
+          <circle cx="38" cy="20" r="3" fill="#FFD43B" opacity="0.6"/>
+          <circle cx="62" cy="80" r="3" fill="#3776AB" opacity="0.6"/>
+        </svg>
+      </div>
+
+      <div class="tech-logo nextjs-logo">
+        <svg viewBox="0 0 100 100" width="55" height="55">
+          <defs>
+            <linearGradient id="nextjs-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#000000;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#434343;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          <polygon points="50,10 90,90 10,90" fill="url(#nextjs-grad)" opacity="0.4"/>
+          <text x="50" y="75" text-anchor="middle" fill="white" font-size="24" font-weight="bold" opacity="0.6">N</text>
+        </svg>
+      </div>
+
+      <div class="tech-logo vscode-logo">
+        <svg viewBox="0 0 100 100" width="50" height="50">
+          <defs>
+            <linearGradient id="vscode-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#007ACC;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#005A9E;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          <path d="M10 10 L40 50 L10 90 L30 90 L60 50 L30 10 Z" fill="url(#vscode-grad)" opacity="0.4"/>
+          <path d="M60 10 L70 20 L60 30 L50 20 Z" fill="#007ACC" opacity="0.5"/>
+          <path d="M70 70 L60 80 L70 90 L80 80 Z" fill="#007ACC" opacity="0.5"/>
+        </svg>
+      </div>
+
+      <div class="tech-logo react-logo">
+        <svg viewBox="0 0 100 100" width="55" height="55">
+          <defs>
+            <linearGradient id="react-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#61DAFB;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#21A0C4;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          <ellipse cx="50" cy="50" rx="40" ry="15" fill="none" stroke="url(#react-grad)" stroke-width="3" opacity="0.4"/>
+          <ellipse cx="50" cy="50" rx="40" ry="15" fill="none" stroke="url(#react-grad)" stroke-width="3" opacity="0.4" transform="rotate(60 50 50)"/>
+          <ellipse cx="50" cy="50" rx="40" ry="15" fill="none" stroke="url(#react-grad)" stroke-width="3" opacity="0.4" transform="rotate(120 50 50)"/>
+          <circle cx="50" cy="50" r="8" fill="#61DAFB" opacity="0.5"/>
+        </svg>
+      </div>
+
+      <div class="tech-logo angular-logo">
+        <svg viewBox="0 0 100 100" width="55" height="55">
+          <defs>
+            <linearGradient id="angular-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#DD0031;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#C3002F;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          <polygon points="50,10 90,90 10,90" fill="url(#angular-grad)" opacity="0.4"/>
+          <text x="50" y="75" text-anchor="middle" fill="white" font-size="24" font-weight="bold" opacity="0.6">A</text>
+        </svg>
+      </div>
+
+      <div class="tech-logo nodejs-logo">
+        <svg viewBox="0 0 100 100" width="50" height="50">
+          <defs>
+            <linearGradient id="nodejs-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#339933;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#267726;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          <polygon points="50,10 85,30 85,70 50,90 15,70 15,30" fill="url(#nodejs-grad)" opacity="0.4"/>
+          <text x="50" y="65" text-anchor="middle" fill="white" font-size="20" font-weight="bold" opacity="0.6">JS</text>
+        </svg>
+      </div>
+
+      <div class="tech-logo github-logo">
+        <svg viewBox="0 0 100 100" width="50" height="50">
+          <defs>
+            <linearGradient id="github-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#181717;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#24292e;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          <circle cx="50" cy="50" r="40" fill="url(#github-grad)" opacity="0.4"/>
+          <path d="M50 25 L35 45 L50 55 L65 45 Z" fill="white" opacity="0.3"/>
+          <path d="M35 45 L50 65 L65 45" fill="none" stroke="white" stroke-width="2" opacity="0.4"/>
+        </svg>
+      </div>
+
+      <div class="tech-logo typescript-logo">
+        <svg viewBox="0 0 100 100" width="50" height="50">
+          <defs>
+            <linearGradient id="ts-grad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" style="stop-color:#3178C6;stop-opacity:1" />
+              <stop offset="100%" style="stop-color:#235A97;stop-opacity:1" />
+            </linearGradient>
+          </defs>
+          <rect x="10" y="10" width="80" height="80" rx="10" fill="url(#ts-grad)" opacity="0.4"/>
+          <text x="50" y="65" text-anchor="middle" fill="white" font-size="28" font-weight="bold" opacity="0.6">TS</text>
+        </svg>
+      </div>
+    </div>
+  </div>
+</section>

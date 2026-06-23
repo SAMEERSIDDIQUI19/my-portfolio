@@ -1,0 +1,193 @@
+<section class="bento-section dark">
+  <div class="bento-container">
+    <div class="section-header">
+      <h2 class="section-title">Technical Expertise</h2>
+      <p class="section-subtitle">Full-stack capabilities across the modern technology landscape</p>
+    </div>
+
+    <div class="bento-grid">
+      <!-- Large Card: Frontend -->
+      <div 
+        class="bento-card large-card"
+        (mouseenter)="onCardHover('frontend')"
+        (mouseleave)="onCardLeave()"
+        @fadeIn
+      >
+        <div class="card-header">
+          <span class="card-icon">{{ techCategories[0].icon }}</span>
+          <h3 class="card-title">{{ techCategories[0].name }}</h3>
+        </div>
+        <div class="card-content">
+          <div class="tech-list">
+            @for (tech of techCategories[0].technologies; track tech) {
+              <div class="tech-item" [style.--tech-color]="techCategories[0].color">
+                <span class="tech-dot"></span>
+                <span class="tech-name">{{ tech }}</span>
+              </div>
+            }
+          </div>
+        </div>
+        <div class="card-decoration" [style.background-color]="techCategories[0].color"></div>
+      </div>
+
+      <!-- Medium Card: Backend -->
+      <div 
+        class="bento-card medium-card"
+        (mouseenter)="onCardHover('backend')"
+        (mouseleave)="onCardLeave()"
+        @fadeIn
+      >
+        <div class="card-header">
+          <span class="card-icon">{{ techCategories[1].icon }}</span>
+          <h3 class="card-title">{{ techCategories[1].name }}</h3>
+        </div>
+        <div class="card-content">
+          <div class="tech-list">
+            @for (tech of techCategories[1].technologies; track tech) {
+              <div class="tech-item" [style.--tech-color]="techCategories[1].color">
+                <span class="tech-dot"></span>
+                <span class="tech-name">{{ tech }}</span>
+              </div>
+            }
+          </div>
+        </div>
+        <div class="card-decoration" [style.background-color]="techCategories[1].color"></div>
+      </div>
+
+      <!-- Small Card: Quick Stats -->
+      <div class="bento-card small-card stats-card" @fadeIn>
+        <div class="card-content">
+          <div class="stat-item">
+            <div class="stat-value">{{ totalTechnologies() }}+</div>
+            <div class="stat-label">Technologies</div>
+          </div>
+          <div class="stat-divider"></div>
+          <div class="stat-item">
+            <div class="stat-value">3+</div>
+            <div class="stat-label">Years Exp</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Medium Card: Databases -->
+      <div 
+        class="bento-card medium-card"
+        (mouseenter)="onCardHover('database')"
+        (mouseleave)="onCardLeave()"
+        @fadeIn
+      >
+        <div class="card-header">
+          <span class="card-icon">{{ techCategories[2].icon }}</span>
+          <h3 class="card-title">{{ techCategories[2].name }}</h3>
+        </div>
+        <div class="card-content">
+          <div class="tech-list">
+            @for (tech of techCategories[2].technologies; track tech) {
+              <div class="tech-item" [style.--tech-color]="techCategories[2].color">
+                <span class="tech-dot"></span>
+                <span class="tech-name">{{ tech }}</span>
+              </div>
+            }
+          </div>
+        </div>
+        <div class="card-decoration" [style.background-color]="techCategories[2].color"></div>
+      </div>
+
+      <!-- Small Card: DevOps -->
+      <div 
+        class="bento-card small-card"
+        (mouseenter)="onCardHover('devops')"
+        (mouseleave)="onCardLeave()"
+        @fadeIn
+      >
+        <div class="card-header">
+          <span class="card-icon">{{ techCategories[3].icon }}</span>
+          <h3 class="card-title">{{ techCategories[3].name }}</h3>
+        </div>
+        <div class="card-content">
+          <div class="tech-list compact">
+            @for (tech of techCategories[3].technologies.slice(0, 4); track tech) {
+              <div class="tech-item" [style.--tech-color]="techCategories[3].color">
+                <span class="tech-name">{{ tech }}</span>
+              </div>
+            }
+          </div>
+        </div>
+        <div class="card-decoration" [style.background-color]="techCategories[3].color"></div>
+      </div>
+
+      <!-- Wide Card: GitHub Contribution Widget -->
+      <div class="bento-card wide-card contribution-card" @fadeIn>
+        <div class="card-header">
+          <span class="card-icon">📊</span>
+          <h3 class="card-title">Activity</h3>
+          <span class="contribution-badge" [class]="contributionLevel()">
+            {{ contributionLevel() === 'high' ? 'High' : contributionLevel() === 'medium' ? 'Medium' : 'Low' }}
+          </span>
+        </div>
+        <div class="card-content">
+          <div class="contribution-grid">
+            @for (day of contributionData(); track day.date) {
+              <div 
+                class="contribution-cell"
+                [class.level-0]="day.level === 0"
+                [class.level-1]="day.level === 1"
+                [class.level-2]="day.level === 2"
+                [class.level-3]="day.level === 3"
+                [class.level-4]="day.level === 4"
+                [attr.title]="day.date + ': ' + day.count + ' contributions'"
+              ></div>
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- Tall Card: Server Status Widget -->
+      <div class="bento-card tall-card server-card" @fadeIn>
+        <div class="card-header">
+          <span class="card-icon">🖥️</span>
+          <h3 class="card-title">Server Status</h3>
+        </div>
+        <div class="card-content">
+          <div class="status-indicator">
+            <div 
+              class="status-dot"
+              [style.background-color]="getStatusColor()"
+              [class.pulse]="serverStatus() === 'online'"
+            ></div>
+            <span class="status-text" [style.color]="getStatusColor()">
+              {{ getStatusIcon() }} {{ serverStatus() === 'online' ? 'All Systems Operational' : serverStatus() === 'maintenance' ? 'Maintenance Mode' : 'System Offline' }}
+            </span>
+          </div>
+          <div class="status-details">
+            <div class="status-row">
+              <span class="status-label">Uptime</span>
+              <span class="status-value">99.9%</span>
+            </div>
+            <div class="status-row">
+              <span class="status-label">Response</span>
+              <span class="status-value">45ms</span>
+            </div>
+            <div class="status-row">
+              <span class="status-label">Last Deploy</span>
+              <span class="status-value">2h ago</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Medium Card: Philosophy -->
+      <div class="bento-card medium-card philosophy-card" @fadeIn>
+        <div class="card-content">
+          <div class="philosophy-content">
+            <span class="philosophy-icon">💡</span>
+            <h4 class="philosophy-title">My Approach</h4>
+            <p class="philosophy-text">
+              Building scalable, maintainable solutions with clean architecture and modern best practices. Quality code that stands the test of time.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
