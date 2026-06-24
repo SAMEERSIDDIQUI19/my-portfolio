@@ -1,88 +1,38 @@
-<section class="skills">
-  <div class="container">
-    <div class="section-header">
-      <h2>My Skills</h2>
-      <p>Technologies and tools I work with</p>
+<section class="relative bg-slate-950 py-20 px-4 overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-t from-slate-900/30 to-slate-950 pointer-events-none"></div>
+
+  <div class="relative z-10 max-w-6xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-14">
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-100 tracking-tight mb-3">
+        My <span class="bg-gradient-to-r from-emerald-400 to-blue-500 bg-clip-text text-transparent">Skills</span>
+      </h2>
+      <p class="text-slate-400 text-base sm:text-lg max-w-xl mx-auto">
+        Technologies and tools I work with daily
+      </p>
     </div>
 
-    <div class="skills-grid">
-      <div class="skill-card" data-skill="csharp">
-        <div class="skill-icon">
-          <i class="fab fa-microsoft"></i>
-        </div>
-        <div class="skill-info">
-          <h3>C#</h3>
-          <div class="skill-bar">
-            <div class="skill-progress" style="width: 85%"></div>
+    <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-4">
+      @for (skill of skills; track skill.name) {
+        <div class="bg-slate-900/60 backdrop-blur-sm border border-slate-800/80 rounded-2xl p-5
+                    hover:border-emerald-500/30 hover:-translate-y-0.5 transition-all duration-300 group">
+          <div class="flex items-center justify-between mb-4">
+            <div class="flex items-center gap-3">
+              <span class="text-2xl">{{ skill.icon }}</span>
+              <h3 class="text-sm font-bold text-slate-100 group-hover:text-emerald-400 transition-colors">{{ skill.name }}</h3>
+            </div>
+            <span class="text-sm font-black" [style.color]="skill.color">{{ skill.level }}%</span>
           </div>
-          <span class="skill-percentage">85%</span>
-        </div>
-      </div>
-
-      <div class="skill-card" data-skill="python">
-        <div class="skill-icon">
-          <i class="fab fa-python"></i>
-        </div>
-        <div class="skill-info">
-          <h3>Python</h3>
-          <div class="skill-bar">
-            <div class="skill-progress" style="width: 80%"></div>
+          <!-- Progress bar -->
+          <div class="h-1.5 bg-slate-800 rounded-full overflow-hidden">
+            <div class="h-full rounded-full transition-all duration-700"
+                 [style.width.%]="skill.level"
+                 [style.background]="'linear-gradient(90deg, ' + skill.color + ', ' + skill.color + '99)'">
+            </div>
           </div>
-          <span class="skill-percentage">70%</span>
+          <p class="text-xs text-slate-500 mt-2">{{ skill.category }}</p>
         </div>
-      </div>
-
-      <div class="skill-card" data-skill="java">
-        <div class="skill-icon">
-          <i class="fab fa-java"></i>
-        </div>
-        <div class="skill-info">
-          <h3>Java</h3>
-          <div class="skill-bar">
-            <div class="skill-progress" style="width: 75%"></div>
-          </div>
-          <span class="skill-percentage">75%</span>
-        </div>
-      </div>
-
-      <div class="skill-card" data-skill="sql">
-        <div class="skill-icon">
-          <i class="fas fa-database"></i>
-        </div>
-        <div class="skill-info">
-          <h3>MS SQL</h3>
-          <div class="skill-bar">
-            <div class="skill-progress" style="width: 90%"></div>
-          </div>
-          <span class="skill-percentage">90%</span>
-        </div>
-      </div>
-
-      <div class="skill-card" data-skill="office">
-        <div class="skill-icon">
-          <i class="fas fa-file-excel"></i>
-        </div>
-        <div class="skill-info">
-          <h3>MS Office</h3>
-          <div class="skill-bar">
-            <div class="skill-progress" style="width: 95%"></div>
-          </div>
-          <span class="skill-percentage">95%</span>
-        </div>
-      </div>
-
-      <div class="skill-card" data-skill="sap">
-        <div class="skill-icon">
-          <i class="fas fa-cogs"></i>
-        </div>
-        <div class="skill-info">
-          <h3>SAP-CRM</h3>
-          <div class="skill-bar">
-            <div class="skill-progress" style="width: 70%"></div>
-          </div>
-          <span class="skill-percentage">70%</span>
-        </div>
-      </div>
+      }
     </div>
   </div>
 </section>

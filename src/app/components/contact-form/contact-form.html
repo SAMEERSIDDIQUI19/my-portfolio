@@ -1,171 +1,238 @@
-<section class="contact-section dark">
-  <div class="contact-container">
-    <div class="section-header">
-      <h2 class="section-title">Let's Connect</h2>
-      <p class="section-subtitle">Have a project in mind or just want to chat? Send me a message!</p>
+<section class="relative bg-slate-950 py-20 px-4 overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-t from-slate-900/60 to-slate-950 pointer-events-none"></div>
+
+  <div class="relative z-10 max-w-6xl mx-auto">
+    <!-- Section Header -->
+    <div class="text-center mb-12">
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-100 tracking-tight mb-3">
+        Let's <span class="bg-gradient-to-r from-emerald-400 to-blue-500 bg-clip-text text-transparent">Connect</span>
+      </h2>
+      <p class="text-slate-400 text-base sm:text-lg max-w-xl mx-auto">
+        Have a project in mind or just want to chat? Drop me a message — I respond within 24 hours.
+      </p>
     </div>
 
-    <div class="contact-content">
-      <div class="form-wrapper" @fadeInUp>
+    <div class="grid lg:grid-cols-5 gap-8 items-start">
+
+      <!-- ===== FORM COLUMN (3/5) ===== -->
+      <div class="lg:col-span-3" @fadeInUp>
+
         <!-- Quick Message Chips -->
-        <div class="quick-messages" @slideIn>
-          <h4 class="quick-message-title">Quick Start</h4>
-          <div class="chips-container">
+        <div class="mb-6" @slideIn>
+          <div class="flex items-center justify-between mb-2">
+            <p class="text-xs font-semibold text-slate-400 uppercase tracking-widest">Quick Start</p>
+            @if (selectedChip()) {
+              <button class="text-xs text-slate-500 hover:text-rose-400 transition-colors cursor-pointer"
+                      (click)="clearChip()">Clear ✕</button>
+            }
+          </div>
+          <div class="flex flex-wrap gap-2">
             @for (msg of quickMessages; track msg.label) {
-              <button 
-                class="message-chip"
-                [class.active]="selectedChip() === msg.label"
-                (click)="selectQuickMessage(msg.label)"
-                @pulse
-              >
-                <span class="chip-emoji">{{ msg.emoji }}</span>
-                <span class="chip-label">{{ msg.label }}</span>
+              <button
+                class="flex items-center gap-2 px-3 py-2 rounded-xl border text-xs font-medium transition-all duration-200 cursor-pointer"
+                [class.bg-emerald-500\/15]="selectedChip() === msg.label"
+                [class.border-emerald-500\/50]="selectedChip() === msg.label"
+                [class.text-emerald-400]="selectedChip() === msg.label"
+                [class.bg-slate-800\/60]="selectedChip() !== msg.label"
+                [class.border-slate-700]="selectedChip() !== msg.label"
+                [class.text-slate-300]="selectedChip() !== msg.label"
+                [class.hover\:border-slate-500]="selectedChip() !== msg.label"
+                (click)="selectQuickMessage(msg.label)">
+                <span>{{ msg.emoji }}</span>
+                <span>{{ msg.label }}</span>
               </button>
             }
           </div>
         </div>
 
         <!-- Contact Form -->
-        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="contact-form">
-          <!-- Name Field -->
-          <div class="form-group" [class.focused]="name?.touched || name?.value">
-            <label for="name" class="floating-label">Your Name</label>
-            <input
-              id="name"
-              type="text"
-              formControlName="name"
-              class="form-input"
-              placeholder=" "
-            />
-            @if (isFieldInvalid('name')) {
-              <span class="error-message">{{ getErrorMessage('name') }}</span>
-            }
+        <form [formGroup]="contactForm" (ngSubmit)="onSubmit()" class="space-y-4">
+
+          <!-- Name + Email Row -->
+          <div class="grid sm:grid-cols-2 gap-4">
+            <div class="form-field-group">
+              <label for="cf-name" class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wide">
+                Your Name <span class="text-rose-400">*</span>
+              </label>
+              <input id="cf-name" type="text" formControlName="name"
+                     class="w-full px-4 py-3 bg-slate-900/80 border rounded-xl text-slate-200 placeholder-slate-600 text-sm
+                            outline-none transition-all duration-200 focus:ring-2 focus:ring-emerald-500/40"
+                     [class.border-slate-700]="!isFieldInvalid('name')"
+                     [class.focus\:border-emerald-500]="!isFieldInvalid('name')"
+                     [class.border-rose-500\/60]="isFieldInvalid('name')"
+                     placeholder="John Doe" />
+              @if (isFieldInvalid('name')) {
+                <p class="mt-1 text-xs text-rose-400">{{ getErrorMessage('name') }}</p>
+              }
+            </div>
+
+            <div class="form-field-group">
+              <label for="cf-email" class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wide">
+                Email <span class="text-rose-400">*</span>
+              </label>
+              <input id="cf-email" type="email" formControlName="email"
+                     class="w-full px-4 py-3 bg-slate-900/80 border rounded-xl text-slate-200 placeholder-slate-600 text-sm
+                            outline-none transition-all duration-200 focus:ring-2 focus:ring-emerald-500/40"
+                     [class.border-slate-700]="!isFieldInvalid('email')"
+                     [class.focus\:border-emerald-500]="!isFieldInvalid('email')"
+                     [class.border-rose-500\/60]="isFieldInvalid('email')"
+                     placeholder="you@example.com" />
+              @if (isFieldInvalid('email')) {
+                <p class="mt-1 text-xs text-rose-400">{{ getErrorMessage('email') }}</p>
+              }
+            </div>
           </div>
 
-          <!-- Email Field -->
-          <div class="form-group" [class.focused]="email?.touched || email?.value">
-            <label for="email" class="floating-label">Email Address</label>
-            <input
-              id="email"
-              type="email"
-              formControlName="email"
-              class="form-input"
-              placeholder=" "
-            />
-            @if (isFieldInvalid('email')) {
-              <span class="error-message">{{ getErrorMessage('email') }}</span>
-            }
-          </div>
-
-          <!-- Subject Field -->
-          <div class="form-group" [class.focused]="subject?.touched || subject?.value">
-            <label for="subject" class="floating-label">Subject</label>
-            <input
-              id="subject"
-              type="text"
-              formControlName="subject"
-              class="form-input"
-              placeholder=" "
-            />
+          <!-- Subject -->
+          <div class="form-field-group">
+            <label for="cf-subject" class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wide">
+              Subject <span class="text-rose-400">*</span>
+            </label>
+            <input id="cf-subject" type="text" formControlName="subject"
+                   class="w-full px-4 py-3 bg-slate-900/80 border rounded-xl text-slate-200 placeholder-slate-600 text-sm
+                          outline-none transition-all duration-200 focus:ring-2 focus:ring-emerald-500/40"
+                   [class.border-slate-700]="!isFieldInvalid('subject')"
+                   [class.focus\:border-emerald-500]="!isFieldInvalid('subject')"
+                   [class.border-rose-500\/60]="isFieldInvalid('subject')"
+                   placeholder="What's this about?" />
             @if (isFieldInvalid('subject')) {
-              <span class="error-message">{{ getErrorMessage('subject') }}</span>
+              <p class="mt-1 text-xs text-rose-400">{{ getErrorMessage('subject') }}</p>
             }
           </div>
 
-          <!-- Message Field -->
-          <div class="form-group" [class.focused]="message?.touched || message?.value">
-            <label for="message" class="floating-label">Your Message</label>
-            <textarea
-              id="message"
-              formControlName="message"
-              class="form-input textarea"
-              rows="5"
-              placeholder=" "
-            ></textarea>
+          <!-- Message -->
+          <div class="form-field-group">
+            <label for="cf-message" class="block text-xs font-semibold text-slate-400 mb-1.5 uppercase tracking-wide">
+              Message <span class="text-rose-400">*</span>
+            </label>
+            <textarea id="cf-message" formControlName="message" rows="5"
+                      class="w-full px-4 py-3 bg-slate-900/80 border rounded-xl text-slate-200 placeholder-slate-600 text-sm
+                             outline-none transition-all duration-200 focus:ring-2 focus:ring-emerald-500/40 resize-none"
+                      [class.border-slate-700]="!isFieldInvalid('message')"
+                      [class.focus\:border-emerald-500]="!isFieldInvalid('message')"
+                      [class.border-rose-500\/60]="isFieldInvalid('message')"
+                      placeholder="Tell me about your project or idea..."></textarea>
             @if (isFieldInvalid('message')) {
-              <span class="error-message">{{ getErrorMessage('message') }}</span>
+              <p class="mt-1 text-xs text-rose-400">{{ getErrorMessage('message') }}</p>
             }
           </div>
 
-          <!-- Submit Button -->
-          <button 
-            type="submit" 
-            class="submit-btn"
-            [disabled]="isSubmitting()"
-            [class.loading]="isSubmitting()"
-          >
+          <!-- Submit -->
+          <button type="submit"
+                  class="w-full flex items-center justify-center gap-3 px-6 py-3.5 rounded-xl font-semibold text-sm transition-all duration-300 cursor-pointer"
+                  [class.bg-gradient-to-r]="!isSubmitting()"
+                  [class.from-emerald-500]="!isSubmitting()"
+                  [class.to-emerald-600]="!isSubmitting()"
+                  [class.text-white]="!isSubmitting()"
+                  [class.shadow-lg]="!isSubmitting()"
+                  [class.shadow-emerald-500\/25]="!isSubmitting()"
+                  [class.hover\:shadow-emerald-500\/40]="!isSubmitting()"
+                  [class.hover\:-translate-y-0\.5]="!isSubmitting()"
+                  [class.bg-slate-700]="isSubmitting()"
+                  [class.text-slate-400]="isSubmitting()"
+                  [class.cursor-not-allowed]="isSubmitting()"
+                  [disabled]="isSubmitting()">
             @if (isSubmitting()) {
-              <span class="btn-text">Sending...</span>
-              <span class="btn-spinner"></span>
+              <span class="inline-block w-4 h-4 border-2 border-slate-400/30 border-t-slate-400 rounded-full animate-spin"></span>
+              <span>Sending...</span>
             } @else {
-              <span class="btn-text">Send Message</span>
-              <span class="btn-icon">→</span>
+              <span>Send Message</span>
+              <span class="text-lg">→</span>
             }
           </button>
+
+          <!-- Success Banner -->
+          @if (showSuccessMessage()) {
+            <div class="flex items-center gap-3 p-4 bg-emerald-500/10 border border-emerald-500/30 rounded-xl" @successPulse>
+              <span class="flex-shrink-0 w-8 h-8 flex items-center justify-center bg-emerald-500/20 rounded-full text-emerald-400 font-bold">✓</span>
+              <div>
+                <p class="text-sm font-semibold text-emerald-400">Message sent!</p>
+                <p class="text-xs text-slate-400">Thank you — I'll get back to you within 24 hours.</p>
+              </div>
+            </div>
+          }
+
+          <!-- Error Banner -->
+          @if (isError()) {
+            <div class="flex items-center gap-3 p-4 bg-rose-500/10 border border-rose-500/30 rounded-xl" @shake>
+              <span class="text-rose-400 font-bold">⚠</span>
+              <p class="text-sm text-rose-300">Something went wrong. Please try again or email me directly.</p>
+            </div>
+          }
         </form>
-
-        <!-- Success Message -->
-        @if (showSuccessMessage()) {
-          <div class="success-message" @fadeInUp>
-            <span class="success-icon">✓</span>
-            <div class="success-content">
-              <h4>Message Sent!</h4>
-              <p>Thank you for reaching out. I'll get back to you soon.</p>
-            </div>
-          </div>
-        }
-
-        <!-- Error Message -->
-        @if (isError()) {
-          <div class="error-message-banner" @fadeInUp>
-            <span class="error-icon">✕</span>
-            <p>Something went wrong. Please try again.</p>
-          </div>
-        }
       </div>
 
-      <!-- Contact Info Side Panel -->
-      <div class="contact-info" @slideIn>
-        <div class="info-card">
-          <h3>Other Ways to Connect</h3>
-          
-          <div class="info-item">
-            <div class="info-icon">📧</div>
-            <div class="info-details">
-              <span class="info-label">Email</span>
-              <a href="mailto:sameer_as@live.com" class="info-value">sameer_as@live.com</a>
-            </div>
-          </div>
+      <!-- ===== INFO COLUMN (2/5) ===== -->
+      <div class="lg:col-span-2 flex flex-col gap-5" @slideIn>
+        <!-- Info Card -->
+        <div class="bg-slate-900/60 backdrop-blur-sm border border-slate-800/80 rounded-2xl p-6">
+          <h3 class="text-base font-bold text-slate-100 mb-5">Other Ways to Connect</h3>
 
-          <div class="info-item">
-            <div class="info-icon">📍</div>
-            <div class="info-details">
-              <span class="info-label">Location</span>
-              <span class="info-value">Available for remote and onsite work.</span>
-            </div>
-          </div>
+          <div class="space-y-4">
+            <a href="mailto:sameer_as@live.com"
+               class="flex items-center gap-4 p-3 rounded-xl hover:bg-slate-800/60 transition-colors group">
+              <span class="w-9 h-9 flex items-center justify-center bg-emerald-500/10 border border-emerald-500/20 rounded-lg text-base group-hover:bg-emerald-500/20 transition-colors">📧</span>
+              <div>
+                <p class="text-xs text-slate-500 uppercase tracking-wide mb-0.5">Email</p>
+                <p class="text-sm text-emerald-400 font-medium">sameer_as&#64;live.com</p>
+              </div>
+            </a>
 
-          <div class="info-item">
-            <div class="info-icon">⏰</div>
-            <div class="info-details">
-              <span class="info-label">Response Time</span>
-              <span class="info-value">Usually within 24 hours</span>
+            <div class="flex items-center gap-4 p-3">
+              <span class="w-9 h-9 flex items-center justify-center bg-blue-500/10 border border-blue-500/20 rounded-lg text-base">📍</span>
+              <div>
+                <p class="text-xs text-slate-500 uppercase tracking-wide mb-0.5">Location</p>
+                <p class="text-sm text-slate-300">Karachi, PK — Remote & Onsite</p>
+              </div>
+            </div>
+
+            <div class="flex items-center gap-4 p-3">
+              <span class="w-9 h-9 flex items-center justify-center bg-violet-500/10 border border-violet-500/20 rounded-lg text-base">⏰</span>
+              <div>
+                <p class="text-xs text-slate-500 uppercase tracking-wide mb-0.5">Response Time</p>
+                <p class="text-sm text-slate-300">Within 24 hours</p>
+              </div>
             </div>
           </div>
         </div>
 
-        <div class="social-links">
-          <a href="https://github.com/SAMEERSIDDIQUI19" class="social-link" title="GitHub">
-            <span>GitHub</span>
+        <!-- Social Links -->
+        <div class="grid grid-cols-3 gap-3">
+          <a href="https://github.com/SAMEERSIDDIQUI19" target="_blank" rel="noopener"
+             class="flex flex-col items-center gap-2 p-4 bg-slate-900/60 border border-slate-800/80 rounded-2xl
+                    hover:border-slate-600 hover:bg-slate-800/60 transition-all duration-200 text-center group">
+            <span class="text-xl">🐙</span>
+            <span class="text-xs text-slate-400 group-hover:text-slate-200 transition-colors">GitHub</span>
           </a>
-          <a href="https://www.linkedin.com/in/sameerahmedsiddiqui" class="social-link" title="LinkedIn">
-            <span>LinkedIn</span>
+          <a href="https://www.linkedin.com/in/sameerahmedsiddiqui" target="_blank" rel="noopener"
+             class="flex flex-col items-center gap-2 p-4 bg-slate-900/60 border border-slate-800/80 rounded-2xl
+                    hover:border-blue-500/40 hover:bg-blue-500/5 transition-all duration-200 text-center group">
+            <span class="text-xl">💼</span>
+            <span class="text-xs text-slate-400 group-hover:text-blue-400 transition-colors">LinkedIn</span>
           </a>
-          <a href="https://wa.me/923352722195" class="social-link" title="LinkedIn">
-            <span>Whatsapp</span>
+          <a href="https://wa.me/923352722195" target="_blank" rel="noopener"
+             class="flex flex-col items-center gap-2 p-4 bg-slate-900/60 border border-slate-800/80 rounded-2xl
+                    hover:border-emerald-500/40 hover:bg-emerald-500/5 transition-all duration-200 text-center group">
+            <span class="text-xl">💬</span>
+            <span class="text-xs text-slate-400 group-hover:text-emerald-400 transition-colors">WhatsApp</span>
           </a>
         </div>
+
+        <!-- Availability note -->
+        <div class="p-4 bg-emerald-500/5 border border-emerald-500/20 rounded-2xl">
+          <div class="flex items-center gap-2 mb-1">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <p class="text-xs font-semibold text-emerald-400">Open to opportunities</p>
+          </div>
+          <p class="text-xs text-slate-500 leading-relaxed pl-4">
+            Currently accepting freelance projects, full-time roles, and consulting engagements.
+          </p>
+        </div>
       </div>
+
     </div>
   </div>
 </section>

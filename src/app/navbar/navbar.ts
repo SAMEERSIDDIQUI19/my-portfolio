@@ -9,6 +9,14 @@ import { Component } from '@angular/core';
 export class NavbarComponent {
   isMobileMenuOpen = false;
 
+  navLinks = [
+    { id: 'home', label: 'Home' },
+    { id: 'expertise', label: 'Expertise' },
+    { id: 'about', label: 'About' },
+    { id: 'skills', label: 'Skills' },
+    { id: 'projects', label: 'Projects' },
+  ];
+
   toggleMobileMenu(): void {
     this.isMobileMenuOpen = !this.isMobileMenuOpen;
   }

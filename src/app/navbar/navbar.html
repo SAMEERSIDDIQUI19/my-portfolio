@@ -1,40 +1,68 @@
-<nav class="navbar sticky-nav">
-  <div class="navbar-container">
-    <div class="navbar-brand">
-      <a href="#home" class="brand-link" (click)="scrollToSection('home', $event)">
-        <span class="brand-text">SAMEER AHMED SIDDIQUI</span>
-        <span class="brand-text-mobile">SAS</span>
-        <svg class="laptop-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <rect x="4" y="4" width="16" height="10" rx="1" ry="1"/>
-          <path d="M2 18h20l-2-4H4l-2 4z"/>
-          <line x1="12" y1="14" x2="12" y2="18"/>
-        </svg>
-      </a>
-    </div>
-    
-    <!-- Mobile menu button -->
-    <button class="mobile-menu-btn" (click)="toggleMobileMenu()" [class.active]="isMobileMenuOpen">
-      <span class="hamburger-line"></span>
-      <span class="hamburger-line"></span>
-      <span class="hamburger-line"></span>
-    </button>
-    
-    <ul class="navbar-nav" [class.mobile-open]="isMobileMenuOpen">
-      <li class="nav-item">
-        <a href="#home" class="nav-link" (click)="scrollToSection('home', $event); closeMobileMenu()">Home</a>
-      </li>
-      <li class="nav-item">
-        <a href="#about" class="nav-link" (click)="scrollToSection('about', $event); closeMobileMenu()">About</a>
-      </li>
-      <li class="nav-item">
-        <a href="#skills" class="nav-link" (click)="scrollToSection('skills', $event); closeMobileMenu()">Skills</a>
-      </li>
-      <li class="nav-item">
-        <a href="#projects" class="nav-link" (click)="scrollToSection('projects', $event); closeMobileMenu()">Projects</a>
-      </li>
-      <li class="nav-item">
-        <a href="#contact" class="nav-link" (click)="scrollToSection('contact', $event); closeMobileMenu()">Contact</a>
+<nav class="sticky top-0 z-50 bg-slate-950/80 backdrop-blur-xl border-b border-slate-800/60">
+  <div class="max-w-6xl mx-auto px-4 flex items-center justify-between h-16">
+
+    <!-- Brand -->
+    <a href="#home" class="flex items-center gap-2.5 group" (click)="scrollToSection('home', $event)">
+      <div class="w-8 h-8 flex items-center justify-center rounded-lg bg-gradient-to-br from-emerald-500 to-blue-500
+                  text-white font-black text-sm shadow-lg shadow-emerald-500/25 group-hover:shadow-emerald-500/40 transition-all">
+        S
+      </div>
+      <span class="hidden sm:block font-bold text-slate-100 text-sm tracking-tight group-hover:text-emerald-400 transition-colors">
+        Sameer Ahmed Siddiqui
+      </span>
+      <span class="block sm:hidden font-bold text-slate-100 text-sm tracking-tight group-hover:text-emerald-400 transition-colors">SAS</span>
+    </a>
+
+    <!-- Desktop Nav -->
+    <ul class="hidden md:flex items-center gap-1">
+      @for (link of navLinks; track link.id) {
+        <li>
+          <a [href]="'#' + link.id"
+             class="px-3 py-1.5 text-sm text-slate-400 hover:text-slate-100 hover:bg-slate-800/60 rounded-lg transition-all duration-200"
+             (click)="scrollToSection(link.id, $event)">{{ link.label }}</a>
+        </li>
+      }
+      <li class="ml-2">
+        <a href="#contact"
+           class="px-4 py-1.5 text-sm font-semibold bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-lg
+                  shadow-md shadow-emerald-500/20 hover:shadow-emerald-500/40 hover:-translate-y-px transition-all duration-200"
+           (click)="scrollToSection('contact', $event)">
+          Hire Me
+        </a>
       </li>
     </ul>
+
+    <!-- Mobile Hamburger -->
+    <button class="md:hidden flex flex-col gap-1.5 p-2 rounded-lg hover:bg-slate-800/60 transition-colors cursor-pointer"
+            (click)="toggleMobileMenu()" aria-label="Toggle menu">
+      <span class="block w-5 h-0.5 bg-slate-400 transition-all duration-300"
+            [class.rotate-45]="isMobileMenuOpen" [class.translate-y-2]="isMobileMenuOpen"></span>
+      <span class="block w-5 h-0.5 bg-slate-400 transition-all duration-300"
+            [class.opacity-0]="isMobileMenuOpen"></span>
+      <span class="block w-5 h-0.5 bg-slate-400 transition-all duration-300"
+            [class.-rotate-45]="isMobileMenuOpen" [class.-translate-y-2]="isMobileMenuOpen"></span>
+    </button>
   </div>
+
+  <!-- Mobile Menu -->
+  @if (isMobileMenuOpen) {
+    <div class="md:hidden border-t border-slate-800/60 bg-slate-950/95 backdrop-blur-xl">
+      <ul class="px-4 py-3 flex flex-col gap-1">
+        @for (link of navLinks; track link.id) {
+          <li>
+            <a [href]="'#' + link.id"
+               class="block px-4 py-2.5 text-sm text-slate-300 hover:text-slate-100 hover:bg-slate-800/60 rounded-lg transition-all"
+               (click)="scrollToSection(link.id, $event); closeMobileMenu()">{{ link.label }}</a>
+          </li>
+        }
+        <li class="pt-2 border-t border-slate-800/60">
+          <a href="#contact"
+             class="block px-4 py-2.5 text-sm font-semibold text-center bg-gradient-to-r from-emerald-500 to-emerald-600 text-white rounded-lg"
+             (click)="scrollToSection('contact', $event); closeMobileMenu()">
+            Hire Me
+          </a>
+        </li>
+      </ul>
+    </div>
+  }
 </nav>

@@ -1,7 +1,7 @@
 import { Component, signal, computed, OnInit, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { trigger, style, animate, transition } from '@angular/animations';
+import { trigger, style, animate, transition, keyframes, query, stagger } from '@angular/animations';
 import { Firestore, collection, addDoc } from '@angular/fire/firestore';
 
 interface QuickMessage {
@@ -21,19 +21,46 @@ interface QuickMessage {
     trigger('fadeInUp', [
       transition(':enter', [
         style({ opacity: 0, transform: 'translateY(20px)' }),
-        animate('500ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+        animate('600ms cubic-bezier(0.16, 1, 0.3, 1)', style({ opacity: 1, transform: 'translateY(0)' }))
       ])
     ]),
     trigger('slideIn', [
       transition(':enter', [
         style({ opacity: 0, transform: 'translateX(-20px)' }),
-        animate('400ms ease-out', style({ opacity: 1, transform: 'translateX(0)' }))
+        animate('400ms cubic-bezier(0.16, 1, 0.3, 1)', style({ opacity: 1, transform: 'translateX(0)' }))
       ])
     ]),
     trigger('pulse', [
       transition(':enter', [
         style({ opacity: 0, transform: 'scale(0.8)' }),
-        animate('300ms ease-out', style({ opacity: 1, transform: 'scale(1)' }))
+        animate('300ms cubic-bezier(0.16, 1, 0.3, 1)', style({ opacity: 1, transform: 'scale(1)' }))
+      ])
+    ]),
+    trigger('chipHover', [
+      transition('* => *', [
+        style({ transform: 'scale(1)' }),
+        animate('200ms cubic-bezier(0.16, 1, 0.3, 1)', style({ transform: 'scale(1.05)' }))
+      ])
+    ]),
+    trigger('successPulse', [
+      transition(':enter', [
+        animate('0.5s ease-in-out', keyframes([
+          style({ transform: 'scale(0.8)', opacity: 0 }),
+          style({ transform: 'scale(1.1)', opacity: 1 }),
+          style({ transform: 'scale(1)', opacity: 1 })
+        ]))
+      ])
+    ]),
+    trigger('shake', [
+      transition('* => *', [
+        animate('0.5s ease-in-out', keyframes([
+          style({ transform: 'translateX(0)' }),
+          style({ transform: 'translateX(-10px)' }),
+          style({ transform: 'translateX(10px)' }),
+          style({ transform: 'translateX(-10px)' }),
+          style({ transform: 'translateX(10px)' }),
+          style({ transform: 'translateX(0)' })
+        ]))
       ])
     ])
   ]
@@ -44,31 +71,43 @@ export class ContactFormComponent implements OnInit {
   selectedChip = signal<string | null>(null);
   showSuccessMessage = signal(false);
 
-  // Quick message options
+  // Enhanced quick message options with more conversion-focused options
   quickMessages: QuickMessage[] = [
     {
       emoji: '💼',
-      label: 'Hiring',
-      subject: 'Job Opportunity',
-      message: 'Hi Sameer, I came across your portfolio and would like to discuss a potential job opportunity.'
+      label: 'Hiring Opportunity',
+      subject: 'Job Opportunity - Full Stack Developer',
+      message: 'Hi Sameer, I came across your portfolio and would like to discuss a potential job opportunity for a Full Stack Developer position.'
     },
     {
       emoji: '🤝',
-      label: 'Collaboration',
-      subject: 'Project Collaboration',
-      message: 'Hi Sameer, I have a project idea and would love to collaborate with you.'
+      label: 'Project Collaboration',
+      subject: 'Project Collaboration Inquiry',
+      message: 'Hi Sameer, I have an exciting project idea and would love to collaborate with you on this venture.'
     },
     {
       emoji: '💬',
-      label: 'Just saying Hi!',
-      subject: 'Hello',
-      message: 'Hi Sameer, just wanted to connect and say hello!'
+      label: 'Let\'s Connect',
+      subject: 'Networking Connection',
+      message: 'Hi Sameer, I\'ve been following your work and would love to connect and explore potential synergies.'
     },
     {
       emoji: '🚀',
-      label: 'Freelance',
-      subject: 'Freelance Project',
-      message: 'Hi Sameer, I have a freelance project that might be a good fit for your skills.'
+      label: 'Freelance Project',
+      subject: 'Freelance Project Opportunity',
+      message: 'Hi Sameer, I have a freelance project that matches your expertise perfectly - let\'s discuss the details.'
+    },
+    {
+      emoji: '💡',
+      label: 'Technical Consultation',
+      subject: 'Technical Consultation Request',
+      message: 'Hi Sameer, I need your expert advice on a technical challenge I\'m facing with my project.'
+    },
+    {
+      emoji: '🎯',
+      label: 'Mentorship',
+      subject: 'Mentorship Request',
+      message: 'Hi Sameer, I would value your mentorship and guidance in my software development journey.'
     }
   ];
 
@@ -115,7 +154,19 @@ export class ContactFormComponent implements OnInit {
         message: selected.message
       });
       this.selectedChip.set(chipLabel);
+      
+      // Focus on message field for immediate customization
+      setTimeout(() => {
+        const messageField = this.contactForm.get('message');
+        if (messageField) {
+          messageField.markAsDirty();
+        }
+      }, 100);
     }
+  }
+  
+  clearChip() {
+    this.selectedChip.set(null);
   }
 
   async onSubmit() {

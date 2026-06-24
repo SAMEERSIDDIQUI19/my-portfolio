@@ -1,193 +1,223 @@
-<section class="bento-section dark">
-  <div class="bento-container">
-    <div class="section-header">
-      <h2 class="section-title">Technical Expertise</h2>
-      <p class="section-subtitle">Full-stack capabilities across the modern technology landscape</p>
+<section class="relative bg-slate-950 py-20 px-4 overflow-hidden">
+  <!-- Background accent -->
+  <div class="absolute inset-0 bg-gradient-to-b from-slate-900/50 to-slate-950 pointer-events-none"></div>
+
+  <div class="relative z-10 max-w-6xl mx-auto">
+    <!-- Section Header -->
+    <div class="text-center mb-12">
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-100 tracking-tight mb-3">
+        Technical <span class="bg-gradient-to-r from-emerald-400 to-blue-500 bg-clip-text text-transparent">Expertise</span>
+      </h2>
+      <p class="text-slate-400 text-base sm:text-lg max-w-xl mx-auto">
+        Full-stack capabilities across the modern technology landscape
+      </p>
     </div>
 
-    <div class="bento-grid">
-      <!-- Large Card: Frontend -->
-      <div 
-        class="bento-card large-card"
-        (mouseenter)="onCardHover('frontend')"
-        (mouseleave)="onCardLeave()"
-        @fadeIn
-      >
-        <div class="card-header">
-          <span class="card-icon">{{ techCategories[0].icon }}</span>
-          <h3 class="card-title">{{ techCategories[0].name }}</h3>
-        </div>
-        <div class="card-content">
-          <div class="tech-list">
-            @for (tech of techCategories[0].technologies; track tech) {
-              <div class="tech-item" [style.--tech-color]="techCategories[0].color">
-                <span class="tech-dot"></span>
-                <span class="tech-name">{{ tech }}</span>
-              </div>
-            }
-          </div>
-        </div>
-        <div class="card-decoration" [style.background-color]="techCategories[0].color"></div>
-      </div>
+    <!-- Bento Grid -->
+    <div class="bento-grid-layout">
 
-      <!-- Medium Card: Backend -->
-      <div 
-        class="bento-card medium-card"
-        (mouseenter)="onCardHover('backend')"
-        (mouseleave)="onCardLeave()"
-        @fadeIn
-      >
-        <div class="card-header">
-          <span class="card-icon">{{ techCategories[1].icon }}</span>
-          <h3 class="card-title">{{ techCategories[1].name }}</h3>
-        </div>
-        <div class="card-content">
-          <div class="tech-list">
-            @for (tech of techCategories[1].technologies; track tech) {
-              <div class="tech-item" [style.--tech-color]="techCategories[1].color">
-                <span class="tech-dot"></span>
-                <span class="tech-name">{{ tech }}</span>
-              </div>
-            }
-          </div>
-        </div>
-        <div class="card-decoration" [style.background-color]="techCategories[1].color"></div>
-      </div>
-
-      <!-- Small Card: Quick Stats -->
-      <div class="bento-card small-card stats-card" @fadeIn>
-        <div class="card-content">
-          <div class="stat-item">
-            <div class="stat-value">{{ totalTechnologies() }}+</div>
-            <div class="stat-label">Technologies</div>
-          </div>
-          <div class="stat-divider"></div>
-          <div class="stat-item">
-            <div class="stat-value">3+</div>
-            <div class="stat-label">Years Exp</div>
-          </div>
-        </div>
-      </div>
-
-      <!-- Medium Card: Databases -->
-      <div 
-        class="bento-card medium-card"
-        (mouseenter)="onCardHover('database')"
-        (mouseleave)="onCardLeave()"
-        @fadeIn
-      >
-        <div class="card-header">
-          <span class="card-icon">{{ techCategories[2].icon }}</span>
-          <h3 class="card-title">{{ techCategories[2].name }}</h3>
-        </div>
-        <div class="card-content">
-          <div class="tech-list">
-            @for (tech of techCategories[2].technologies; track tech) {
-              <div class="tech-item" [style.--tech-color]="techCategories[2].color">
-                <span class="tech-dot"></span>
-                <span class="tech-name">{{ tech }}</span>
-              </div>
-            }
-          </div>
-        </div>
-        <div class="card-decoration" [style.background-color]="techCategories[2].color"></div>
-      </div>
-
-      <!-- Small Card: DevOps -->
-      <div 
-        class="bento-card small-card"
-        (mouseenter)="onCardHover('devops')"
-        (mouseleave)="onCardLeave()"
-        @fadeIn
-      >
-        <div class="card-header">
-          <span class="card-icon">{{ techCategories[3].icon }}</span>
-          <h3 class="card-title">{{ techCategories[3].name }}</h3>
-        </div>
-        <div class="card-content">
-          <div class="tech-list compact">
-            @for (tech of techCategories[3].technologies.slice(0, 4); track tech) {
-              <div class="tech-item" [style.--tech-color]="techCategories[3].color">
-                <span class="tech-name">{{ tech }}</span>
-              </div>
-            }
-          </div>
-        </div>
-        <div class="card-decoration" [style.background-color]="techCategories[3].color"></div>
-      </div>
-
-      <!-- Wide Card: GitHub Contribution Widget -->
-      <div class="bento-card wide-card contribution-card" @fadeIn>
-        <div class="card-header">
-          <span class="card-icon">📊</span>
-          <h3 class="card-title">Activity</h3>
-          <span class="contribution-badge" [class]="contributionLevel()">
-            {{ contributionLevel() === 'high' ? 'High' : contributionLevel() === 'medium' ? 'Medium' : 'Low' }}
+      <!-- LARGE: Frontend -->
+      <div class="bento-card group col-span-2 row-span-2 relative overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/60 backdrop-blur-sm p-6
+                  hover:border-blue-500/40 hover:bg-slate-900/80 transition-all duration-300 cursor-pointer"
+           (click)="selectCategory(techCategories[0])" @fadeIn>
+        <div class="absolute top-0 right-0 w-40 h-40 rounded-full opacity-10 blur-3xl pointer-events-none"
+             style="background: #3b82f6; transform: translate(30%, -30%);"></div>
+        <div class="flex items-center gap-3 mb-5">
+          <span class="text-2xl">{{ techCategories[0].icon }}</span>
+          <h3 class="text-lg font-bold text-slate-100">{{ techCategories[0].name }}</h3>
+          <span class="ml-auto text-xs px-2 py-0.5 rounded-full bg-blue-500/15 text-blue-400 border border-blue-500/20">
+            {{ techCategories[0].technologies.length }} tools
           </span>
         </div>
-        <div class="card-content">
-          <div class="contribution-grid">
+        <div class="flex flex-wrap gap-2">
+          @for (tech of techCategories[0].technologies; track tech) {
+            <span class="px-3 py-1.5 text-xs font-medium rounded-lg bg-slate-800 border border-slate-700/60 text-slate-300
+                         group-hover:border-blue-500/30 transition-colors duration-300">{{ tech }}</span>
+          }
+        </div>
+        <p class="mt-4 text-xs text-slate-500 leading-relaxed">{{ techCategories[0].description }}</p>
+      </div>
+
+      <!-- Backend -->
+      <div class="bento-card group relative overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/60 backdrop-blur-sm p-5
+                  hover:border-emerald-500/40 hover:bg-slate-900/80 transition-all duration-300 cursor-pointer"
+           (click)="selectCategory(techCategories[1])" @fadeIn>
+        <div class="absolute top-0 right-0 w-28 h-28 rounded-full opacity-10 blur-2xl pointer-events-none"
+             style="background: #10b981; transform: translate(30%, -30%);"></div>
+        <div class="flex items-center gap-2 mb-4">
+          <span class="text-xl">{{ techCategories[1].icon }}</span>
+          <h3 class="text-base font-bold text-slate-100">{{ techCategories[1].name }}</h3>
+        </div>
+        <div class="flex flex-wrap gap-1.5">
+          @for (tech of techCategories[1].technologies; track tech) {
+            <span class="px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700/60 text-slate-300">{{ tech }}</span>
+          }
+        </div>
+      </div>
+
+      <!-- Stats -->
+      <div class="bento-card relative overflow-hidden rounded-2xl border border-slate-800/80 bg-gradient-to-br from-slate-900/80 to-slate-800/40 p-5
+                  flex flex-col items-center justify-center gap-4" @fadeIn>
+        <div class="text-center">
+          <div class="text-4xl font-black text-emerald-400">{{ totalTechnologies() }}+</div>
+          <div class="text-xs text-slate-500 mt-1 uppercase tracking-widest">Technologies</div>
+        </div>
+        <div class="w-px h-8 bg-slate-700"></div>
+        <div class="text-center">
+          <div class="text-4xl font-black text-blue-400">3+</div>
+          <div class="text-xs text-slate-500 mt-1 uppercase tracking-widest">Years Exp</div>
+        </div>
+      </div>
+
+      <!-- Databases -->
+      <div class="bento-card group relative overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/60 backdrop-blur-sm p-5
+                  hover:border-violet-500/40 hover:bg-slate-900/80 transition-all duration-300 cursor-pointer"
+           (click)="selectCategory(techCategories[2])" @fadeIn>
+        <div class="absolute top-0 right-0 w-28 h-28 rounded-full opacity-10 blur-2xl pointer-events-none"
+             style="background: #a855f7; transform: translate(30%, -30%);"></div>
+        <div class="flex items-center gap-2 mb-4">
+          <span class="text-xl">{{ techCategories[2].icon }}</span>
+          <h3 class="text-base font-bold text-slate-100">{{ techCategories[2].name }}</h3>
+        </div>
+        <div class="flex flex-wrap gap-1.5">
+          @for (tech of techCategories[2].technologies; track tech) {
+            <span class="px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700/60 text-slate-300">{{ tech }}</span>
+          }
+        </div>
+      </div>
+
+      <!-- DevOps -->
+      <div class="bento-card group relative overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/60 backdrop-blur-sm p-5
+                  hover:border-amber-500/40 hover:bg-slate-900/80 transition-all duration-300 cursor-pointer"
+           (click)="selectCategory(techCategories[3])" @fadeIn>
+        <div class="absolute top-0 right-0 w-28 h-28 rounded-full opacity-10 blur-2xl pointer-events-none"
+             style="background: #f59e0b; transform: translate(30%, -30%);"></div>
+        <div class="flex items-center gap-2 mb-4">
+          <span class="text-xl">{{ techCategories[3].icon }}</span>
+          <h3 class="text-base font-bold text-slate-100">{{ techCategories[3].name }}</h3>
+        </div>
+        <div class="flex flex-wrap gap-1.5">
+          @for (tech of techCategories[3].technologies; track tech) {
+            <span class="px-2.5 py-1 text-xs rounded-md bg-slate-800 border border-slate-700/60 text-slate-300">{{ tech }}</span>
+          }
+        </div>
+      </div>
+
+      <!-- GitHub Contribution Heatmap -->
+      <div class="bento-card col-span-2 relative overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/60 p-5" @fadeIn>
+        <div class="flex items-center gap-3 mb-4">
+          <span class="text-lg">📊</span>
+          <h3 class="text-base font-bold text-slate-100">Contribution Activity</h3>
+          <span class="ml-auto text-xs px-2 py-0.5 rounded-full border"
+                [class.bg-emerald-500\/15]="contributionLevel() === 'high'"
+                [class.text-emerald-400]="contributionLevel() === 'high'"
+                [class.border-emerald-500\/30]="contributionLevel() === 'high'"
+                [class.bg-amber-500\/15]="contributionLevel() === 'medium'"
+                [class.text-amber-400]="contributionLevel() === 'medium'"
+                [class.border-amber-500\/30]="contributionLevel() === 'medium'"
+                [class.bg-slate-500\/15]="contributionLevel() === 'low'"
+                [class.text-slate-400]="contributionLevel() === 'low'"
+                [class.border-slate-500\/30]="contributionLevel() === 'low'">
+            {{ contributionLevel() | titlecase }} Activity
+          </span>
+        </div>
+        <div class="contribution-heatmap overflow-x-auto">
+          <div class="flex gap-px min-w-max">
             @for (day of contributionData(); track day.date) {
-              <div 
-                class="contribution-cell"
-                [class.level-0]="day.level === 0"
-                [class.level-1]="day.level === 1"
-                [class.level-2]="day.level === 2"
-                [class.level-3]="day.level === 3"
-                [class.level-4]="day.level === 4"
-                [attr.title]="day.date + ': ' + day.count + ' contributions'"
-              ></div>
+              <div class="w-2.5 h-2.5 rounded-sm contribution-cell transition-opacity hover:opacity-80"
+                   [class.bg-slate-800]="day.level === 0"
+                   [class.bg-emerald-900]="day.level === 1"
+                   [class.bg-emerald-700]="day.level === 2"
+                   [class.bg-emerald-500]="day.level === 3"
+                   [class.bg-emerald-400]="day.level === 4"
+                   [title]="day.date + ': ' + day.count + ' contributions'">
+              </div>
             }
           </div>
         </div>
       </div>
 
-      <!-- Tall Card: Server Status Widget -->
-      <div class="bento-card tall-card server-card" @fadeIn>
-        <div class="card-header">
-          <span class="card-icon">🖥️</span>
-          <h3 class="card-title">Server Status</h3>
+      <!-- Server Status -->
+      <div class="bento-card relative overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/60 p-5" @fadeIn>
+        <div class="flex items-center gap-2 mb-4">
+          <span class="text-lg">🖥️</span>
+          <h3 class="text-base font-bold text-slate-100">Live Metrics</h3>
         </div>
-        <div class="card-content">
-          <div class="status-indicator">
-            <div 
-              class="status-dot"
-              [style.background-color]="getStatusColor()"
-              [class.pulse]="serverStatus() === 'online'"
-            ></div>
-            <span class="status-text" [style.color]="getStatusColor()">
-              {{ getStatusIcon() }} {{ serverStatus() === 'online' ? 'All Systems Operational' : serverStatus() === 'maintenance' ? 'Maintenance Mode' : 'System Offline' }}
-            </span>
-          </div>
-          <div class="status-details">
-            <div class="status-row">
-              <span class="status-label">Uptime</span>
-              <span class="status-value">99.9%</span>
+        <!-- Status pill -->
+        <div class="flex items-center gap-2 mb-4">
+          <span class="relative flex h-2.5 w-2.5">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full opacity-60"
+                  [class.bg-emerald-400]="serverStatus() === 'online'"
+                  [class.bg-amber-400]="serverStatus() === 'maintenance'"
+                  [class.bg-rose-400]="serverStatus() === 'offline'"></span>
+            <span class="relative inline-flex rounded-full h-2.5 w-2.5"
+                  [class.bg-emerald-500]="serverStatus() === 'online'"
+                  [class.bg-amber-500]="serverStatus() === 'maintenance'"
+                  [class.bg-rose-500]="serverStatus() === 'offline'"></span>
+          </span>
+          <span class="text-xs font-medium"
+                [class.text-emerald-400]="serverStatus() === 'online'"
+                [class.text-amber-400]="serverStatus() === 'maintenance'"
+                [class.text-rose-400]="serverStatus() === 'offline'">
+            {{ serverStatus() === 'online' ? 'All Systems Go' : serverStatus() === 'maintenance' ? 'Maintenance' : 'Offline' }}
+          </span>
+        </div>
+        <div class="space-y-3">
+          @for (metric of serverMetrics(); track metric.name) {
+            <div class="flex items-center justify-between">
+              <span class="text-xs text-slate-400">{{ metric.name }}</span>
+              <div class="flex items-center gap-1.5">
+                <span class="text-sm font-bold text-slate-200">{{ metric.value }}{{ metric.unit }}</span>
+                <span class="text-xs" [style.color]="getTrendColor(metric.trend)">{{ getTrendIcon(metric.trend) }}</span>
+              </div>
             </div>
-            <div class="status-row">
-              <span class="status-label">Response</span>
-              <span class="status-value">45ms</span>
-            </div>
-            <div class="status-row">
-              <span class="status-label">Last Deploy</span>
-              <span class="status-value">2h ago</span>
-            </div>
-          </div>
+          }
         </div>
       </div>
 
-      <!-- Medium Card: Philosophy -->
-      <div class="bento-card medium-card philosophy-card" @fadeIn>
-        <div class="card-content">
-          <div class="philosophy-content">
-            <span class="philosophy-icon">💡</span>
-            <h4 class="philosophy-title">My Approach</h4>
-            <p class="philosophy-text">
-              Building scalable, maintainable solutions with clean architecture and modern best practices. Quality code that stands the test of time.
+      <!-- Philosophy -->
+      <div class="bento-card relative overflow-hidden rounded-2xl border border-slate-800/80 bg-gradient-to-br from-violet-900/20 to-slate-900/60 p-5" @fadeIn>
+        <div class="h-full flex flex-col justify-between">
+          <span class="text-3xl">💡</span>
+          <div>
+            <h4 class="text-sm font-bold text-slate-100 mb-2">My Approach</h4>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Building scalable, maintainable solutions with clean architecture and modern best practices that stand the test of time.
             </p>
           </div>
         </div>
       </div>
+
     </div>
   </div>
+
+  <!-- Expanded Category Modal -->
+  @if (isExpanded() && selectedCategory()) {
+    <div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-slate-950/80 backdrop-blur-sm"
+         @fadeIn (click)="closeExpandedView()">
+      <div class="w-full max-w-md bg-slate-900 border border-slate-700/80 rounded-2xl shadow-2xl overflow-hidden"
+           @bentoCard (click)="$event.stopPropagation()">
+        <div class="flex items-center justify-between px-6 py-4 border-b border-slate-800">
+          <div class="flex items-center gap-3">
+            <span class="text-2xl">{{ selectedCategory()!.icon }}</span>
+            <h3 class="text-lg font-bold text-slate-100">{{ selectedCategory()!.name }}</h3>
+          </div>
+          <button class="text-slate-500 hover:text-slate-200 transition-colors text-lg cursor-pointer"
+                  (click)="closeExpandedView()">✕</button>
+        </div>
+        <div class="p-6">
+          <p class="text-sm text-slate-400 mb-5 leading-relaxed">{{ selectedCategory()!.description }}</p>
+          <div class="flex flex-wrap gap-2">
+            @for (tech of selectedCategory()!.technologies; track tech) {
+              <span class="px-3 py-1.5 text-xs font-medium rounded-lg border text-slate-200"
+                    [style.border-color]="selectedCategory()!.color + '40'"
+                    [style.background-color]="selectedCategory()!.color + '15'">
+                {{ tech }}
+              </span>
+            }
+          </div>
+        </div>
+      </div>
+    </div>
+  }
 </section>

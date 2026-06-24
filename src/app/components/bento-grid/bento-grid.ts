@@ -1,18 +1,26 @@
-import { Component, signal, computed, OnInit } from '@angular/core';
+import { Component, signal, computed, OnInit, OnDestroy } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { trigger, style, animate, transition } from '@angular/animations';
+import { trigger, style, animate, transition, keyframes, query, stagger } from '@angular/animations';
 
 interface TechCategory {
   name: string;
   icon: string;
   technologies: string[];
   color: string;
+  description: string;
 }
 
 interface ContributionDay {
   date: string;
   count: number;
   level: 0 | 1 | 2 | 3 | 4;
+}
+
+interface ServerMetric {
+  name: string;
+  value: number;
+  unit: string;
+  trend: 'up' | 'down' | 'stable';
 }
 
 @Component({
@@ -25,48 +33,70 @@ interface ContributionDay {
     trigger('fadeIn', [
       transition(':enter', [
         style({ opacity: 0, transform: 'scale(0.95)' }),
-        animate('400ms ease-out', style({ opacity: 1, transform: 'scale(1)' }))
+        animate('400ms cubic-bezier(0.16, 1, 0.3, 1)', style({ opacity: 1, transform: 'scale(1)' }))
       ])
     ]),
     trigger('slideIn', [
       transition(':enter', [
         style({ opacity: 0, transform: 'translateY(20px)' }),
-        animate('500ms ease-out', style({ opacity: 1, transform: 'translateY(0)' }))
+        animate('500ms cubic-bezier(0.16, 1, 0.3, 1)', style({ opacity: 1, transform: 'translateY(0)' }))
+      ])
+    ]),
+    trigger('pulse', [
+      transition('* => *', [
+        animate('2s ease-in-out infinite', keyframes([
+          style({ transform: 'scale(1)', opacity: 1 }),
+          style({ transform: 'scale(1.05)', opacity: 0.8 }),
+          style({ transform: 'scale(1)', opacity: 1 })
+        ]))
+      ])
+    ]),
+    trigger('bentoCard', [
+      transition(':enter', [
+        style({ opacity: 0, transform: 'translateY(30px)' }),
+        animate('600ms cubic-bezier(0.16, 1, 0.3, 1)', style({ opacity: 1, transform: 'translateY(0)' }))
       ])
     ])
   ]
 })
-export class BentoGridComponent implements OnInit {
+export class BentoGridComponent implements OnInit, OnDestroy {
   // Signals for reactive state
   hoveredCard = signal<string | null>(null);
   serverStatus = signal<'online' | 'offline' | 'maintenance'>('online');
   contributionData = signal<ContributionDay[]>([]);
+  serverMetrics = signal<ServerMetric[]>([]);
+  selectedCategory = signal<TechCategory | null>(null);
+  isExpanded = signal(false);
 
-  // Tech categories data
+  // Enhanced tech categories data
   techCategories: TechCategory[] = [
     {
       name: 'Frontend',
       icon: '🎨',
-      technologies: ['Angular 17+', 'Next.js', 'TypeScript', 'Tailwind CSS', 'React'],
-      color: '#3b82f6'
+      technologies: ['Angular 17+', 'Next.js', 'TypeScript', 'Tailwind CSS', 'React', 'Vue.js'],
+      color: '#3b82f6',
+      description: 'Building responsive, performant user interfaces with modern frameworks'
     },
     {
       name: 'Backend',
       icon: '⚙️',
-      technologies: ['.NET Core', 'Node.js', 'Python', 'Web API', 'REST/GraphQL'],
-      color: '#10b981'
+      technologies: ['.NET Core', 'Node.js', 'Python', 'Web API', 'REST/GraphQL', 'Microservices'],
+      color: '#10b981',
+      description: 'Scalable server-side solutions and API architecture'
     },
     {
       name: 'Databases',
       icon: '🗄️',
-      technologies: ['PostgreSQL', 'SQL Server', 'Firebase', 'MongoDB', 'Redis'],
-      color: '#a855f7'
+      technologies: ['PostgreSQL', 'SQL Server', 'Firebase', 'MongoDB', 'Redis', 'Elasticsearch'],
+      color: '#a855f7',
+      description: 'Data modeling, optimization, and database architecture'
     },
     {
       name: 'DevOps',
       icon: '🚀',
-      technologies: ['Docker', 'Git', 'CI/CD', 'Azure', 'AWS'],
-      color: '#f59e0b'
+      technologies: ['Docker', 'Git', 'CI/CD', 'Azure', 'AWS', 'Kubernetes'],
+      color: '#f59e0b',
+      description: 'Infrastructure automation, deployment pipelines, and cloud architecture'
     }
   ];
 
@@ -86,6 +116,21 @@ export class BentoGridComponent implements OnInit {
   ngOnInit() {
     this.generateMockContributions();
     this.startServerStatusSimulation();
+    this.initializeServerMetrics();
+  }
+
+  ngOnDestroy() {
+    // Cleanup intervals if any
+  }
+
+  private initializeServerMetrics() {
+    const metrics: ServerMetric[] = [
+      { name: 'Uptime', value: 99.9, unit: '%', trend: 'up' },
+      { name: 'Response Time', value: 45, unit: 'ms', trend: 'down' },
+      { name: 'Requests/sec', value: 1250, unit: 'req/s', trend: 'up' },
+      { name: 'Error Rate', value: 0.01, unit: '%', trend: 'stable' }
+    ];
+    this.serverMetrics.set(metrics);
   }
 
   private generateMockContributions() {
@@ -128,6 +173,32 @@ export class BentoGridComponent implements OnInit {
 
   onCardLeave() {
     this.hoveredCard.set(null);
+  }
+
+  selectCategory(category: TechCategory) {
+    this.selectedCategory.set(category);
+    this.isExpanded.set(true);
+  }
+
+  closeExpandedView() {
+    this.isExpanded.set(false);
+    this.selectedCategory.set(null);
+  }
+
+  getTrendIcon(trend: 'up' | 'down' | 'stable'): string {
+    switch (trend) {
+      case 'up': return '↑';
+      case 'down': return '↓';
+      case 'stable': return '→';
+    }
+  }
+
+  getTrendColor(trend: 'up' | 'down' | 'stable'): string {
+    switch (trend) {
+      case 'up': return '#10b981';
+      case 'down': return '#ef4444';
+      case 'stable': return '#64748b';
+    }
   }
 
   getStatusIcon() {

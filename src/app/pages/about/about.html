@@ -1,111 +1,132 @@
-<section class="about">
-  <div class="container">
-    <div class="section-header">
-      <h2>About Me</h2>
-      <p>Get to know more about my background and journey</p>
+<section class="relative bg-slate-950 py-20 px-4 overflow-hidden">
+  <div class="absolute inset-0 bg-gradient-to-b from-slate-900/30 to-slate-950 pointer-events-none"></div>
+
+  <div class="relative z-10 max-w-6xl mx-auto">
+    <!-- Header -->
+    <div class="text-center mb-14">
+      <h2 class="text-3xl sm:text-4xl lg:text-5xl font-black text-slate-100 tracking-tight mb-3">
+        About <span class="bg-gradient-to-r from-emerald-400 to-blue-500 bg-clip-text text-transparent">Me</span>
+      </h2>
+      <p class="text-slate-400 text-base sm:text-lg max-w-xl mx-auto">
+        Background, experience, and the journey that brought me here
+      </p>
     </div>
 
-    <div class="about-content">
-      <div class="profile-section">
-        <div class="profile-card">
-          <div class="profile-image">
-            <div class="profile-placeholder">
-              <span>SAS</span>
-            </div>
-          </div>
-          <div class="profile-info">
-            <h3>SAMEER AHMED SIDDIQUI</h3>
-            <p class="location">📍 Karachi, Pakistan</p>
-            <p class="profile-description">
-              To associate with an organization which provides me an opportunity to improve my knowledge & enhance my interpersonal skill.
-            </p>
-          </div>
-        </div>
-      </div>
+    <div class="grid lg:grid-cols-3 gap-8">
 
-      <div class="experience-section">
-        <h3>Professional Experience</h3>
-        <div class="timeline">
-          <div class="timeline-item">
-            <div class="timeline-marker"></div>
-            <div class="timeline-content">
-              <h4>ASTRIK DIGITAL</h4>
-              <p class="position">.NET DEVELOPER</p>
-              <p class="description">
-                CRM, Kiosk System, HRMS (Attendance Tracking System), Angular Frontend with Windsurf, ASP.NET Core Web API backend.
-              </p>
-              <p>07/2023 – present</p>
-            </div>
+      <!-- Profile Card -->
+      <div class="lg:col-span-1">
+        <div class="bg-slate-900/60 backdrop-blur-sm border border-slate-800/80 rounded-2xl p-6 text-center sticky top-24">
+          <div class="w-20 h-20 mx-auto mb-4 rounded-2xl bg-gradient-to-br from-emerald-500 to-blue-500
+                      flex items-center justify-center text-2xl font-black text-white shadow-xl shadow-emerald-500/20">
+            SAS
           </div>
-          <div class="timeline-item">
-            <div class="timeline-marker"></div>
-            <div class="timeline-content">
-              <h4>AMAZON EXPERT</h4>
-              <p class="position">VIRTUAL ASSISTANT</p>
-              <p class="description">
-                FBA and FBM services.
-              </p>
-              <p>2021 – 2023</p>
+          <h3 class="text-base font-bold text-slate-100 mb-1">Sameer Ahmed Siddiqui</h3>
+          <p class="text-sm text-emerald-400 font-medium mb-3">Full-Stack Developer</p>
+          <p class="text-xs text-slate-500 mb-4">📍 Karachi, Pakistan</p>
+          <p class="text-xs text-slate-400 leading-relaxed">
+            Passionate about building scalable systems and delivering high-quality software that makes a real impact.
+          </p>
+          <!-- Quick stats -->
+          <div class="grid grid-cols-3 gap-3 mt-5 pt-5 border-t border-slate-800">
+            <div class="text-center">
+              <div class="text-lg font-black text-emerald-400">3+</div>
+              <div class="text-xs text-slate-500 mt-0.5">Years</div>
             </div>
-          </div>
-          <div class="timeline-item">
-            <div class="timeline-marker"></div>
-            <div class="timeline-content">
-              <h4>K-Electric 118 Complaint Department</h4>
-              <p class="position">CSR</p>
-              <p class="description">
-                Customer service representative handling complaints and support.
-              </p>
-              <p>08/2019 – 09/2020</p>
+            <div class="text-center border-x border-slate-800">
+              <div class="text-lg font-black text-blue-400">10+</div>
+              <div class="text-xs text-slate-500 mt-0.5">Projects</div>
+            </div>
+            <div class="text-center">
+              <div class="text-lg font-black text-violet-400">20+</div>
+              <div class="text-xs text-slate-500 mt-0.5">Tools</div>
             </div>
           </div>
         </div>
       </div>
 
-      <div class="education-section">
-        <h3>Education</h3>
-        <div class="education-cards">
-          <div class="education-card">
-            <div class="education-icon">🎓</div>
-            <div class="education-info">
-              <h4>BS Computer Science</h4>
-              <p>IQRA University</p>
-              <p>2023 - present</p>
+      <!-- Experience + Education -->
+      <div class="lg:col-span-2 flex flex-col gap-8">
+
+        <!-- Experience Timeline -->
+        <div class="bg-slate-900/60 backdrop-blur-sm border border-slate-800/80 rounded-2xl p-6">
+          <h3 class="text-base font-bold text-slate-100 mb-6 flex items-center gap-2">
+            <span class="w-6 h-6 flex items-center justify-center rounded-md bg-emerald-500/15 border border-emerald-500/30 text-emerald-400 text-xs">💼</span>
+            Professional Experience
+          </h3>
+          <div class="relative pl-6 flex flex-col gap-6">
+            <!-- Timeline line -->
+            <div class="absolute left-2 top-0 bottom-0 w-px bg-slate-800"></div>
+
+            <!-- Job 1 -->
+            <div class="relative">
+              <div class="absolute -left-4 top-1 w-2.5 h-2.5 rounded-full bg-emerald-500 border-2 border-slate-900 shadow-lg shadow-emerald-500/50"></div>
+              <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 mb-2">
+                <div>
+                  <h4 class="text-sm font-bold text-slate-100">Astrik Digital</h4>
+                  <p class="text-xs font-semibold text-emerald-400">.NET Developer</p>
+                </div>
+                <span class="text-xs px-2 py-0.5 h-fit rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-400 whitespace-nowrap">
+                  Jul 2023 – Present
+                </span>
+              </div>
+              <p class="text-xs text-slate-400 leading-relaxed">
+                CRM, Kiosk System, HRMS with Attendance Tracking, Angular frontend, ASP.NET Core Web API backend.
+              </p>
             </div>
-          </div>
-          <div class="education-card">
-            <div class="education-icon">⚡</div>
-            <div class="education-info">
-              <h4>BS Electronic Engineering</h4>
-              <p>Sir Syed University of Engineering & Technology</p>
-              <p>2022 – 02/2023</p>
+
+            <!-- Job 2 -->
+            <div class="relative">
+              <div class="absolute -left-4 top-1 w-2.5 h-2.5 rounded-full bg-blue-500 border-2 border-slate-900"></div>
+              <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 mb-2">
+                <div>
+                  <h4 class="text-sm font-bold text-slate-100">Amazon Expert</h4>
+                  <p class="text-xs font-semibold text-blue-400">Virtual Assistant</p>
+                </div>
+                <span class="text-xs px-2 py-0.5 h-fit rounded-full bg-blue-500/10 border border-blue-500/20 text-blue-400 whitespace-nowrap">
+                  2021 – 2023
+                </span>
+              </div>
+              <p class="text-xs text-slate-400 leading-relaxed">FBA and FBM services management.</p>
             </div>
-          </div>
-          <div class="education-card">
-            <div class="education-icon">🔧</div>
-            <div class="education-info">
-              <h4>Diploma in Electrical Engineering (DE)</h4>
-              <p>Aligarh Institute and College</p>
-              <p>2019 – 2022</p>
-            </div>
-          </div>
-          <div class="education-card">
-            <div class="education-icon">📚</div>
-            <div class="education-info">
-              <h4>Intermediate</h4>
-              <p>GDBC Gulistan-e-Jouhar</p>
-              <p>2017 – 2018</p>
-            </div>
-          </div>
-          <div class="education-card">
-            <div class="education-icon">🏫</div>
-            <div class="education-info">
-              <h4>Matriculation</h4>
-              <p>Shaheen Public School</p>
-              <p>2016</p>
+
+            <!-- Job 3 -->
+            <div class="relative">
+              <div class="absolute -left-4 top-1 w-2.5 h-2.5 rounded-full bg-slate-600 border-2 border-slate-900"></div>
+              <div class="flex flex-col sm:flex-row sm:items-start sm:justify-between gap-1 mb-2">
+                <div>
+                  <h4 class="text-sm font-bold text-slate-100">K-Electric</h4>
+                  <p class="text-xs font-semibold text-slate-400">Customer Service Representative</p>
+                </div>
+                <span class="text-xs px-2 py-0.5 h-fit rounded-full bg-slate-700/60 border border-slate-600/40 text-slate-400 whitespace-nowrap">
+                  Aug 2019 – Sep 2020
+                </span>
+              </div>
+              <p class="text-xs text-slate-400 leading-relaxed">Handling complaints and customer support for the 118 department.</p>
             </div>
           </div>
         </div>
+
+        <!-- Education Grid -->
+        <div class="bg-slate-900/60 backdrop-blur-sm border border-slate-800/80 rounded-2xl p-6">
+          <h3 class="text-base font-bold text-slate-100 mb-6 flex items-center gap-2">
+            <span class="w-6 h-6 flex items-center justify-center rounded-md bg-blue-500/15 border border-blue-500/30 text-blue-400 text-xs">🎓</span>
+            Education
+          </h3>
+          <div class="grid sm:grid-cols-2 gap-3">
+            @for (edu of education; track edu.degree) {
+              <div class="flex items-start gap-3 p-3 bg-slate-800/50 border border-slate-700/60 rounded-xl hover:border-slate-600 transition-colors">
+                <span class="text-xl flex-shrink-0 mt-0.5">{{ edu.icon }}</span>
+                <div>
+                  <p class="text-xs font-semibold text-slate-200 leading-tight mb-0.5">{{ edu.degree }}</p>
+                  <p class="text-xs text-slate-500">{{ edu.institution }}</p>
+                  <p class="text-xs text-slate-600 mt-0.5">{{ edu.period }}</p>
+                </div>
+              </div>
+            }
+          </div>
+        </div>
+
       </div>
     </div>
   </div>
