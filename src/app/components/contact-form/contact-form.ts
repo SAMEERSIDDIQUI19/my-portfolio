@@ -2,7 +2,7 @@ import { Component, signal, computed, OnInit, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { trigger, style, animate, transition, keyframes, query, stagger } from '@angular/animations';
-import { Firestore, collection, addDoc } from '@angular/fire/firestore';
+import { FirebaseService } from '../../services/firebase.service';
 
 interface QuickMessage {
   emoji: string;
@@ -116,7 +116,7 @@ export class ContactFormComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private firestore: Firestore
+    private firebaseService: FirebaseService
   ) {
     this.contactForm = this.fb.group({
       name: ['', [Validators.required, Validators.minLength(2)]],
@@ -188,10 +188,11 @@ export class ContactFormComponent implements OnInit {
 
     try {
       const formData = this.contactForm.value;
-      await addDoc(collection(this.firestore, 'contacts'), {
-        ...formData,
-        createdAt: new Date(),
-        quickMessage: this.selectedChip()
+      await this.firebaseService.submitContactForm({
+        name: formData.name,
+        email: formData.email,
+        subject: formData.subject,
+        message: formData.message
       });
 
       this.formStatus.set('success');
