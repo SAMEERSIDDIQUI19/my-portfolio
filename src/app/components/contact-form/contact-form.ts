@@ -178,6 +178,10 @@ export class ContactFormComponent implements OnInit {
     this.selectedChip.set(null);
   }
 
+  dismissError() {
+    this.formStatus.set('idle');
+  }
+
   async onSubmit() {
     if (this.contactForm.invalid) {
       this.markFormGroupTouched(this.contactForm);
