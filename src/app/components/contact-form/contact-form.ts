@@ -146,6 +146,15 @@ export class ContactFormComponent implements OnInit {
   isSuccess = computed(() => this.formStatus() === 'success');
   isError = computed(() => this.formStatus() === 'error');
 
+  mailtoFallback = computed(() => {
+    const v = this.contactForm.value;
+    const subject = encodeURIComponent(v.subject || 'Message from Portfolio');
+    const body = encodeURIComponent(
+      `Name: ${v.name || ''}\nEmail: ${v.email || ''}\n\n${v.message || ''}`
+    );
+    return `mailto:sameer_as@live.com?subject=${subject}&body=${body}`;
+  });
+
   selectQuickMessage(chipLabel: string) {
     const selected = this.quickMessages.find(msg => msg.label === chipLabel);
     if (selected) {
@@ -188,8 +197,8 @@ export class ContactFormComponent implements OnInit {
       this.formStatus.set('success');
       this.contactForm.reset();
       this.selectedChip.set(null);
-    } catch (error) {
-      console.error('Error submitting form:', error);
+    } catch (error: any) {
+      console.error('Firestore submission error:', error?.code, error?.message, error);
       this.formStatus.set('error');
     }
   }

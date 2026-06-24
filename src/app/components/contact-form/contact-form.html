@@ -154,9 +154,19 @@
 
           <!-- Error Banner -->
           @if (isError()) {
-            <div class="flex items-center gap-3 p-4 bg-rose-500/10 border border-rose-500/30 rounded-xl" @shake>
-              <span class="text-rose-400 font-bold">⚠</span>
-              <p class="text-sm text-rose-300">Something went wrong. Please try again or email me directly.</p>
+            <div class="p-4 bg-rose-500/10 border border-rose-500/30 rounded-xl space-y-2" @shake>
+              <div class="flex items-center gap-2">
+                <span class="text-rose-400 font-bold">⚠</span>
+                <p class="text-sm font-semibold text-rose-300">Message couldn't be sent.</p>
+              </div>
+              <p class="text-xs text-slate-400 leading-relaxed">
+                This is usually a temporary issue. You can retry, or reach me directly via email — I respond within 24 hours.
+              </p>
+              <a [href]="mailtoFallback()"
+                 class="inline-flex items-center gap-2 mt-1 px-4 py-2 text-xs font-semibold rounded-lg
+                        bg-rose-500/15 border border-rose-500/30 text-rose-300 hover:bg-rose-500/25 transition-colors">
+                📧 Email me directly
+              </a>
             </div>
           }
         </form>
